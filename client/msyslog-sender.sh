@@ -89,3 +89,5 @@ case "$1" in
     *)
         start_logging
 esac
+
+exit 0
