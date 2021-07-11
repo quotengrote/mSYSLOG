@@ -45,7 +45,7 @@ function stop_logging {
     # checkif process is running
     if test -f "$pid_file"; then
         # kill any pid in that file
-        kill "$(cat "$pid_file")"
+        kill $(cat $pid_file) &>/dev/null
         # remove pid
         rm "$pid_file"
     else
