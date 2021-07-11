@@ -17,7 +17,7 @@ function stop {
     # checkif process is running
     if test -f "/var/run/log-sender.pid"; then
         # kill any pid in that file
-        kill `cat /var/run/log-sender.pid`
+        kill `cat "/var/run/log-sender.pid"`
         # remove pid
         rm "/var/run/log-sender.pid"
         logger "log-sender stopped"
@@ -36,7 +36,7 @@ function start {
             # start process in background
         	  tail --lines=0 -f $i | nc -N localhost 12345 &  #HIER NOCH VARS
             # save processid of background process
-            echo $! >> /var/run/log-sender.pid
+            echo $! >> "/var/run/log-sender.pid"
             logger "log-sender started"
         done
     fi
@@ -46,8 +46,8 @@ function start {
 declare -a logfile_paths
 
 # lese/binde ein config ein
-if test -f /etc/log-sender.conf; then
-  source /etc/log-sender.conf
+if test -f "/etc/log-sender.conf"; then
+  source "/etc/log-sender.conf"
 else
   echo "No config at /etc/log-sender.conf"
   exit 1
@@ -67,5 +67,5 @@ case "$1" in
         get_help
         ;;
     *)
-        $0 start
+        start
 esac
