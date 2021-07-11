@@ -7,7 +7,9 @@ pid_file="/var/run/log-sender.pid"
 function get_config_from_file {
     log_receiver_port=`grep log_receiver_port $config_file | cut --delimiter '=' --fields 2`
     log_receiver_fqdn=`grep log_receiver_fqdn $config_file | cut --delimiter '=' --fields 2`
-    logfiles=`cat $config_file | awk -F"=" '/logfiles=/ { print $2}' `
+    logfiles=`cat $config_file | awk -F"=" '/logfiles=/  { print $2 }' #| sed -r 's#^#\"#g;s#,#\" \"#g;s#$#\"#g'`
+    # awk: nimm alles hinter name= als eine variable
+    # sed: ersetze "," zeileanfang und zeilen ende mit "
 }
 
 function output_help {
@@ -45,9 +47,9 @@ function start_logging {
         for i in "${logfile_paths[@]}"
         do
             #debug
-            #echo $i
+            echo $i
             # start process in background
-        	  tail --lines=0 --follow $i | nc -N $log_receiver_fqdn $log_receiver_port &
+        	  tail --lines=0 --follow "$i" | nc -N $log_receiver_fqdn $log_receiver_port &
             # save processid of background process
             echo $! >> "$pid_file"
         done
@@ -63,15 +65,16 @@ function start_logging {
 if test -f "$config_file"; then
     get_config_from_file
     # debug
-    # echo $logfiles
+     echo $logfiles
     # echo "lese config"
 else
     echo "No config at" "$config_file"
     exit 1
 fi
 
-# erstelle array für logfile pfade, vorher müßen vars natürlich gesetzt sein
-declare -a logfile_paths=( $logfiles )
+# erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
+# leerzeichen erlaubt, werte kmma getrennt
+IFS=',' read -r -a logfile_paths <<< $logfiles
 
 case "$1" in
     start)
