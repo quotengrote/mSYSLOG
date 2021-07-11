@@ -53,6 +53,7 @@ else
   exit 1
 fi
 
+# "main"
 case "$1" in
     start)
         start
