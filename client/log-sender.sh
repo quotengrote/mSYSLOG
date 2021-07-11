@@ -1,72 +1,91 @@
 #!/bin/bash
 
-function get_help {
+# set vars
+config_file="/etc/log-sender.conf"
+pid_file="/var/run/log-sender.pid"
+
+function get_config_from_file {
+    log_receiver_port=`grep log_receiver_port $config_file | cut --delimiter '=' --fields 2`
+    log_receiver_fqdn=`grep log_receiver_fqdn $config_file | cut --delimiter '=' --fields 2`
+    logfiles=`cat $config_file | awk -F"=" '/logfiles=/ { print $2}' `
+}
+
+function output_help {
     echo "[start|stop|restart|help]"
     echo "Send logs to a remote server - purely written in bash and gnu-tools"
 }
 
-function restart {
-    if test -f "/var/run/log-sender.pid"; then
-        $0 stop
+function restart_logging {
+    if test -f "$pid_file"; then
+        stop_logging # funktionen
     fi
-    $0 start
-    logger "log-sender restarted"
+    start_logging # funktionen
 }
 
-function stop {
+function stop_logging {
     # checkif process is running
-    if test -f "/var/run/log-sender.pid"; then
+    if test -f "$pid_file"; then
         # kill any pid in that file
-        kill `cat "/var/run/log-sender.pid"`
+        kill `cat "$pid_file"`
         # remove pid
-        rm "/var/run/log-sender.pid"
-        logger "log-sender stopped"
+        rm "$pid_file"
     else
         echo "script is not running"
     fi
 }
 
-function start {
-    if test -f "/var/run/log-sender.pid"; then
+function start_logging {
+    if test -f "$pid_file"; then
         echo "script is already running"
     else
+        # debug
+        #echo "in start"
+        #echo ${logfile_paths[1]}
         # for every path in ... do
         for i in "${logfile_paths[@]}"
         do
+            #debug
+            #echo $i
             # start process in background
-        	  tail --lines=0 -f $i | nc -N localhost 12345 &  #HIER NOCH VARS
+        	  tail --lines=0 --follow $i | nc -N $log_receiver_fqdn $log_receiver_port &
             # save processid of background process
-            echo $! >> "/var/run/log-sender.pid"
-            logger "log-sender started"
+            echo $! >> "$pid_file"
         done
     fi
 }
 
-# erstelle array für logfile pfade
-declare -a logfile_paths
 
-# lese/binde ein config ein
-if test -f "/etc/log-sender.conf"; then
-  source "/etc/log-sender.conf"
-else
-  echo "No config at /etc/log-sender.conf"
-  exit 1
-fi
+
+
 
 # "main"
+# lese/binde ein config ein
+if test -f "$config_file"; then
+    get_config_from_file
+    # debug
+    # echo $logfiles
+    # echo "lese config"
+else
+    echo "No config at" "$config_file"
+    exit 1
+fi
+
+# erstelle array für logfile pfade, vorher müßen vars natürlich gesetzt sein
+declare -a logfile_paths=( $logfiles )
+
 case "$1" in
     start)
-        start
+        start_logging
         ;;
     stop)
-        stop
+        stop_logging
         ;;
     restart)
-        restart
+        restart_logging
         ;;
     help)
-        get_help
+        output_help
         ;;
     *)
-        start
+        start_logging
 esac
