@@ -20,8 +20,9 @@ function get_config_from_file {
     fi
 }
 function output_help {
-    echo "[start|stop|restart|help]"
-    echo "Send logs to a remote server - purely written in bash and gnu-tools"
+    figlet mSYSLOG
+    echo "Options:"
+    echo "    msyslog-sender.sh [start|stop|restart|help]"
 }
 function restart_logging {
     if test -f "$pid_file"; then
