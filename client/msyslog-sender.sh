@@ -7,10 +7,10 @@ pid_file="/var/run/msyslog.pid"
 function get_config_from_file {
     # lese/binde ein config ein
     if test -f "$config_file"; then
-        log_receiver_port=$(cat $config_file | awk -F"=" '/log_receiver_port=/  { print $2 }')
-        log_receiver_fqdn=$(cat $config_file | awk -F"=" '/log_receiver_fqdn=/  { print $2 }')
+        log_receiver_port=$(awk -F"=" '/log_receiver_port=/  { print $2 }' $config_file)
+        log_receiver_fqdn=$(awk -F"=" '/log_receiver_fqdn=/  { print $2 }' $config_file)
         # erstelle array "logfile_paths"
-        IFS=',' read -r -a logfile_paths <<< $(cat $config_file | awk -F"=" '/logfiles=/  { print $2 }')
+        IFS=',' read -r -a logfile_paths <<< $( awk -F"=" '/logfiles=/  { print $2 }' $config_file)
         # erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
         # leerzeichen erlaubt, werte kmma getrennt
         # awk: nimm alles hinter name= als eine variable
