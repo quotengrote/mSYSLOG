@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # set vars
-config_file="/etc/log-sender.conf"
-pid_file="/var/run/log-sender.pid"
+config_file="/etc/msyslog.conf"
+pid_file="/var/run/msyslog.pid"
 
 function get_config_from_file {
     # lese/binde ein config ein
