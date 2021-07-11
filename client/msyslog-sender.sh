@@ -22,7 +22,18 @@ function get_config_from_file {
 function output_help {
     figlet mSYSLOG
     echo "Options:"
-    echo "    msyslog-sender.sh [start|stop|restart|help]"
+    echo "    msyslog-sender.sh [start|stop|restart|status|help]"
+}
+function output_status {
+    # checkif process is running
+    if test -f "$pid_file"; then
+        echo "config-file:" $config_file
+        echo "pid-file:" $pid_file
+        echo "running processes:"
+        cat  "$pid_file"
+    else
+        echo "script is not running"
+    fi
 }
 function restart_logging {
     if test -f "$pid_file"; then
@@ -71,6 +82,9 @@ case "$1" in
         ;;
     help)
         output_help
+        ;;
+    status)
+        output_status
         ;;
     *)
         start_logging
