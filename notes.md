@@ -7,4 +7,3 @@ programm
 suche pfade aus config
 suche seerver aus config
 starte fur jede datei einen tail + hostname + ncat
-beim beenden speichere postion fur jede datei
