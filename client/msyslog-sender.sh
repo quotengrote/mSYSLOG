@@ -60,9 +60,7 @@ function start_logging {
         for i in "${logfile_paths[@]}"
         do
             # start processes in background
-        	  tail --lines=0 --follow "$i" | nc -N "$log_receiver_fqdn" "$log_receiver_port" &
-            # save processid of background process
-            echo $! >> "$pid_file"
+        	  tail --lines=0 --follow "$i" & echo $! >> "$pid_file" | nc -N $log_receiver_fqdn $log_receiver_port & echo $! >> "$pid_file" &
         done
     fi
 }
