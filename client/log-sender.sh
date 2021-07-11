@@ -5,25 +5,30 @@ config_file="/etc/log-sender.conf"
 pid_file="/var/run/log-sender.pid"
 
 function get_config_from_file {
-    log_receiver_port=`grep log_receiver_port $config_file | cut --delimiter '=' --fields 2`
-    log_receiver_fqdn=`grep log_receiver_fqdn $config_file | cut --delimiter '=' --fields 2`
-    logfiles=`cat $config_file | awk -F"=" '/logfiles=/  { print $2 }' #| sed -r 's#^#\"#g;s#,#\" \"#g;s#$#\"#g'`
-    # awk: nimm alles hinter name= als eine variable
-    # sed: ersetze "," zeileanfang und zeilen ende mit "
+    # lese/binde ein config ein
+    if test -f "$config_file"; then
+        log_receiver_port=`cat $config_file | awk -F"=" '/log_receiver_port=/  { print $2 }'`
+        log_receiver_fqdn=`cat $config_file | awk -F"=" '/log_receiver_fqdn=/  { print $2 }'`
+        # erstelle array "logfile_paths"
+        IFS=',' read -r -a logfile_paths <<< `cat $config_file | awk -F"=" '/logfiles=/  { print $2 }'`
+        # erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
+        # leerzeichen erlaubt, werte kmma getrennt
+        # awk: nimm alles hinter name= als eine variable
+    else
+        echo "No config at" "$config_file"
+        exit 1
+    fi
 }
-
 function output_help {
     echo "[start|stop|restart|help]"
     echo "Send logs to a remote server - purely written in bash and gnu-tools"
 }
-
 function restart_logging {
     if test -f "$pid_file"; then
         stop_logging # funktionen
     fi
     start_logging # funktionen
 }
-
 function stop_logging {
     # checkif process is running
     if test -f "$pid_file"; then
@@ -35,20 +40,14 @@ function stop_logging {
         echo "script is not running"
     fi
 }
-
 function start_logging {
     if test -f "$pid_file"; then
         echo "script is already running"
     else
-        # debug
-        #echo "in start"
-        #echo ${logfile_paths[1]}
         # for every path in ... do
         for i in "${logfile_paths[@]}"
         do
-            #debug
-            echo $i
-            # start process in background
+            # start processes in background
         	  tail --lines=0 --follow "$i" | nc -N $log_receiver_fqdn $log_receiver_port &
             # save processid of background process
             echo $! >> "$pid_file"
@@ -56,25 +55,8 @@ function start_logging {
     fi
 }
 
-
-
-
-
 # "main"
-# lese/binde ein config ein
-if test -f "$config_file"; then
-    get_config_from_file
-    # debug
-     echo $logfiles
-    # echo "lese config"
-else
-    echo "No config at" "$config_file"
-    exit 1
-fi
-
-# erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
-# leerzeichen erlaubt, werte kmma getrennt
-IFS=',' read -r -a logfile_paths <<< $logfiles
+get_config_from_file
 
 case "$1" in
     start)
