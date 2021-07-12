@@ -1,0 +1,7 @@
+{
+  "Package": "msyslog-client",
+  "Version": "0.0.1",
+  "Architecture": "amd64",
+  "Maintainer": "Michael Grote",
+  "Description": " A simple centralized logging solution almost only with bash and gnu-tools."
+}
