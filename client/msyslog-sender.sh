@@ -4,6 +4,13 @@
 config_file="/etc/msyslog.conf"
 pid_file="/var/run/msyslog.pid"
 
+function set_fqdn {
+    domain=$(resolvectl status | awk '/DNS Domain/ { print $3}')
+    fqdn=$(hostname).$domain
+}
+function set_prefix {
+    cat $1 | sed "s/^/$i/;s/^/$fqdn\: /"
+}
 function get_config_from_file {
     # lese/binde ein config ein
     if test -f "$config_file"; then
@@ -15,7 +22,7 @@ function get_config_from_file {
         # leerzeichen erlaubt, werte kmma getrennt
         # awk: nimm alles hinter name= als eine variable
     else
-        echo "No config at" "$config_file"
+        echo "Error1: No config at" "$config_file"
         exit 1
     fi
 }
@@ -23,6 +30,16 @@ function output_help {
     figlet mSYSLOG
     echo "Options:"
     echo "    msyslog-sender.sh [start|stop|restart|status|help]"
+}
+function check_logfile_paths {
+    # check if all logfiles from the config exist
+    for i in "${logfile_paths[@]}"
+    do
+        if test ! -f "$i"; then # wenn datei NCIHT existiert
+            echo "Error2:" $i "does not exist! Check" $config_file
+            exit 2
+        fi
+    done
 }
 function output_status {
     # checkif process is running
@@ -56,15 +73,19 @@ function start_logging {
     if test -f "$pid_file"; then
         echo "script is already running"
     else
+        check_logfile_paths # funktion
+        set_fqdn
         # for every path in ... do
         for i in "${logfile_paths[@]}"
         do
             # start processes in background
-        	  tail --lines=0 --follow "$i" & echo $! >> "$pid_file" | nc -N $log_receiver_fqdn $log_receiver_port & echo $! >> "$pid_file" &
+        	  tail --lines=0 --follow "$i" | awk -v prefix="$fqdn $i" '{print prefix $0}'  | nc -N acng.grote.lan 12345 & echo $! >> "$pid_file" &
+            echo $! >> "$pid_file"
         done
     fi
 }
-
+#  & echo $! >> "$pid_file"
+# | sed "s/^/$fqdn\: /"
 # "main"
 get_config_from_file
 
@@ -89,3 +110,11 @@ case "$1" in
 esac
 
 exit 0
+
+
+# Error2
+# LogFile in key "logfiles" not found
+# Error1
+# Config file not found
+
+sed -i 's/^/$(hostname)/'
