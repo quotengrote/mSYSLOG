@@ -29,9 +29,20 @@ function get_config_from_file {
 }
 function output_help {
     figlet mSYSLOG
-    echo "Options:"
-    echo "    msyslog-sender.sh [start|stop|restart|status|help]"
+    cat <<EOF
+Usage: msyslog-client.sh [OPTIONS]
+
+  Manages the msyslog-client.
+
+Options:
+  -h, --help                  Displays this text.
+  -s, --status                Display the current status of the script.
+  stop                        Stops the script and all of its child-processes.
+  restart                     Restarts the script and all of its child-processes.
+  start, without a option     Starts the script and all of its child-processes.
+EOF
 }
+
 function check_logfile_paths {
     # check if all logfiles from the config exist
     for i in "${logfile_paths[@]}"
@@ -100,10 +111,10 @@ case "$1" in
     restart)
         restart_logging
         ;;
-    help)
+    --help | -h)
         output_help
         ;;
-    status)
+    --status | -s)
         output_status
         ;;
     *)
