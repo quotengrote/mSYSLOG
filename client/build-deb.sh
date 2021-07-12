@@ -1,6 +1,6 @@
 #!/bin/bash
-echo install
+echo "Install equivs packages"
 sudo apt-get install equivs
-echo build
+echo "Build deb package"
 cd $GITHUB_WORKSPACE/client
 equivs-build equivs-controlfile
