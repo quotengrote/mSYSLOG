@@ -32,14 +32,14 @@ function output_help {
     cat <<EOF
 Usage: msyslog-client.sh [OPTIONS]
 
-  Manages the msyslog-client.
+    Manages the msyslog-client.
 
 Options:
-  -h, --help                  Displays this text.
-  -s, --status                Display the current status of the script.
-  stop                        Stops the script and all of its child-processes.
-  restart                     Restarts the script and all of its child-processes.
-  start, without a option     Starts the script and all of its child-processes.
+    -h, --help                  Displays this text.
+    -s, --status                Display the current status of the script.
+    stop                        Stops the script and all of its child-processes.
+    restart                     Restarts the script and all of its child-processes.
+    start, without a option     Starts the script and all of its child-processes.
 EOF
 }
 
