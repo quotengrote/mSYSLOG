@@ -15,3 +15,8 @@ jobs:
           arch: x86_64
           format: deb
           package: ./client/msyslog-client-package-build.yml
+      - name: upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: msyslog-client.deb
+          path: *client*.deb
