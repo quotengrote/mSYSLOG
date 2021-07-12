@@ -80,7 +80,7 @@ function start_logging {
         do
             # start processes in background
             # starte jeden prozess in einer subshell und schreibe die pid in eine datei
-        	  (tail --lines=0 --follow "$i" & echo $! >> "$pid_file") | (awk -v prefix="$fqdn $i" '{print prefix $0}' & echo $! >> "$pid_file") | nc -N acng.grote.lan 12345 & echo $! >> "$pid_file" &
+        	  (tail --lines=0 --follow "$i" & echo $! >> "$pid_file") | (stdbuf -oL -eL awk -v prefix="$fqdn $i" '{print prefix $0}' & echo $! >> "$pid_file") | nc $log_receiver_fqdn $log_receiver_port & echo $! >> "$pid_file" &
         done
     fi
 }

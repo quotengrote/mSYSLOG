@@ -1,5 +1,5 @@
 # client
-sudo apt install netcat-openbsd figlet -y
+sudo apt install netcat-openbsd figlet expect -y
 
 #server
 sudo apt install ncat -y
