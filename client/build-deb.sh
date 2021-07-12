@@ -1,3 +1,3 @@
 #!/bin/bash
 sudo apt-get install equivs
-equivs-build equivs-controlfile
+equivs-build client/equivs-controlfile
