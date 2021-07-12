@@ -1,3 +1,0 @@
-netcat-openbsd
-figlet
-expect
