@@ -1,0 +1,16 @@
+name: build-packages
+on: push
+jobs:
+  name: build deb
+  runs-on: ubuntu-latest
+  steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: make script executable
+      run: chmod +x ./client/build-deb.sh
+      env: COMMIT_HASH: $GITHUB_SHA
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: msyslog-client
+        path: msyslog-client_$GITHUB_SHA.deb
