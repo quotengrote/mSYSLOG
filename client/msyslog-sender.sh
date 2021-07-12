@@ -9,7 +9,7 @@ function set_fqdn {
     fqdn=$(hostname).$domain
 }
 function set_prefix {
-    cat "$1" | sed "s/^/$i/;s/^/$fqdn\: /"
+    sed "s/^/$i/;s/^/$fqdn\: /" "$1"
 }
 function get_config_from_file {
     # lese/binde ein config ein
