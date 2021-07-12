@@ -4,7 +4,7 @@
   "deleteLocal": false,
   "hostname": "vm-test2.grote.lan",
   "port": "22",
-  "target": "/home/mg/log-sender",
+  "target": "/home/mg/msyslog",
   "ignore": [
     ".git/**"
   ],
