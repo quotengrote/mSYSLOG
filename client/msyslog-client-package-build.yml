@@ -1,0 +1,19 @@
+meta:
+  description: mSYSLOG-Client Package
+  vendor: Michael Grote
+  maintainer: Michael Grote
+files:
+  "/usr/local/sbin/msyslog-client.sh":
+    file: msyslog-client.sh
+    mode: "0700"
+    user: "msyslog"
+  "/etc/msyslog-client.conf":
+    file: msyslog-client.conf
+    mode: "0644"
+    user: "msyslog"
+    keep: true
+#units:
+#  - etc/systemd/system/my-package.service
+scripts:
+  "post-install": post-inst.sh
+user: msyslog
