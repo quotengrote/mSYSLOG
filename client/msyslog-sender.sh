@@ -116,5 +116,3 @@ exit 0
 # LogFile in key "logfiles" not found
 # Error1
 # Config file not found
-
-sed -i 's/^/$(hostname)/'
