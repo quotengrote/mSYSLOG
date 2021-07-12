@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # set vars
-config_file="/etc/msyslog.conf"
-pid_file="/var/run/msyslog.pid"
+config_file="/etc/msyslog-client.conf"
+pid_file="/var/run/msyslog-client.pid"
 
 function set_fqdn {
     domain=$(resolvectl status | awk '/DNS Domain/ { print $3}')
@@ -14,6 +14,7 @@ function set_prefix {
 function get_config_from_file {
     # lese/binde ein config ein
     if test -f "$config_file"; then
+        # https://dzone.com/articles/bash-snippet-reading-values-from-a-configuration-f
         log_receiver_port=$(awk -F"=" '/log_receiver_port=/ { print $2 }' $config_file)
         log_receiver_fqdn=$(awk -F"=" '/log_receiver_fqdn=/ { print $2 }' $config_file)
         # erstelle array "logfile_paths"
