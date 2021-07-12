@@ -19,7 +19,7 @@ jobs:
           # Required: Configuration File
           config-file: 'client/build-config.json'
           # Optional: deps-file
-          deps-file: client/dependencies.txt'
+          deps-file: 'client/dependencies.txt'
           # Optional: Custom Output Directory
           # output-path: 'desired/path/to/generated/file/named/control'
           # Optional: Case Sensitive JSON Keys
