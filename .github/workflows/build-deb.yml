@@ -1,25 +1,20 @@
-name: Debian-Control-File-Build-Example
+name: build deb-files
 on:
   push:
-#    branches: [ master, main ]
-#  workflow_dispatch:
-
 jobs:
-  deb-control-file-build:
+  build deb-files:
     name: Generate Debian Package
     runs-on: ubuntu-20.04
-
     steps:
       - name: checkout
         uses: actions/checkout@v1
-        # Generate Debian control File
       - name: make script exectable
         run: chmod +x client/build-deb.sh
       - name: run script
         run: client/build-deb.sh
-      - name: Upload Generated Control File
+      - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: generated-control-file
-          path: "${{ steps.deb_control.outputs.control_file_path }}"
+          name: msyslog-client*.deb
+          path: *.deb
           if-no-files-found: error
