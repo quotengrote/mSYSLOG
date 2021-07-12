@@ -53,3 +53,16 @@ Options:
 
 
 ```
+
+## Example Configuration
+```
+# configfile for msyslog-client
+
+# files whose contents should be sent/comma-separated
+logfiles=/var/log/syslog,/var/log/kern.log,/var/log/messages,/var/log/x xx,/var/log/secure
+
+# fqdn and port to which the data should get send
+log_receiver_fqdn=acng.grote.lan
+log_receiver_port=12345
+
+```
