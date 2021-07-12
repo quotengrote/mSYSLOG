@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+      - name: checkout
+        uses: actions/checkout@v1
         # Generate Debian control File
       - name: Generate Debian control File
         uses: Nightwind-Developments/debian-control-file-builder@latest
