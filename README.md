@@ -1,6 +1,3 @@
-[![bash-lint](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml)
-
-___
 ```
            ______   ______  _     ___   ____
  _ __ ___ / ___\ \ / / ___|| |   / _ \ / ___|
@@ -9,6 +6,9 @@ ___
 |_| |_| |_|____/ |_| |____/|_____\___/ \____|
 ```
 
-simple centralized logging
+ A simple centralized logging solution alsmost only with bash and gnu-tools.
 
-License: [MIT](./LICENSE)
+ [![bash-lint](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml)
+ [![shieldio-issues](https://img.shields.io/github/issues/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/issues)
+[![shieldio-pr](https://img.shields.io/github/issues-pr/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/pulls)
+[![shieldio-license](https://img.shields.io/badge/license-MIT-brightgreen)](./LICENSE)
