@@ -62,7 +62,7 @@ function stop_logging {
     # checkif process is running
     if test -f "$pid_file"; then
         # kill any pid in that file
-        kill -SIGTERM $(cat $pid_file) &>/dev/null
+        kill $(cat $pid_file) &>/dev/null
         # remove pid
         rm "$pid_file"
     else
@@ -79,13 +79,12 @@ function start_logging {
         for i in "${logfile_paths[@]}"
         do
             # start processes in background
-            # starte jeden porzess in einer subshell und schreibe die pid in eine datei
+            # starte jeden prozess in einer subshell und schreibe die pid in eine datei
         	  (tail --lines=0 --follow "$i" & echo $! >> "$pid_file") | (awk -v prefix="$fqdn $i" '{print prefix $0}' & echo $! >> "$pid_file") | nc -N acng.grote.lan 12345 & echo $! >> "$pid_file" &
         done
     fi
 }
-#  & echo $! >> "$pid_file"
-# | sed "s/^/$fqdn\: /"
+
 # "main"
 get_config_from_file
 
