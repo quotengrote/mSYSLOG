@@ -1,4 +1,4 @@
-name:: Debian-Control-File-Build-Example
+name: Debian-Control-File-Build-Example
 on:
   push:
 #    branches: [ master, main ]
