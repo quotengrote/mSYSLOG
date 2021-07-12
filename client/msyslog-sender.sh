@@ -36,7 +36,7 @@ function check_logfile_paths {
     for i in "${logfile_paths[@]}"
     do
         if test ! -f "$i"; then # wenn datei NCIHT existiert
-            echo "Error2:" $i "does not exist! Check" $config_file
+            echo "Error2:" "$i" "does not exist! Check" $config_file
             exit 2
         fi
     done
