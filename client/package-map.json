@@ -1,0 +1,14 @@
+[
+  {
+    "name": "control",
+    "path": "/DEBIAN/"
+  },
+  {
+    "name": "msyslog-client.sh",
+    "path": "/usr/local/sbin/"
+  }
+  {
+    "name": "msyslog-client.conf",
+    "path": "/etc/"
+  }
+]
