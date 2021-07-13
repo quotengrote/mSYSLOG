@@ -16,6 +16,20 @@
 [![build packages](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml)
 
 ## Table of contents
+<!-- TOC START min:1 max:3 link:true asterisk:false update:true -->
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Getting started](#getting-started)
+    - [Dependencies](#dependencies)
+    - [Setup deb](#setup-deb)
+    - [setup manual](#setup-manual)
+  - [Usage client](#usage-client)
+  - [Example client Configuration](#example-client-configuration)
+  - [Usage server](#usage-server)
+  - [License](#license)
+<!-- TOC END -->
+
+
 
 ## Introduction
 mSYSLOG is a programm that collects logfiles and send it via `netcat` to a server.
@@ -35,6 +49,7 @@ mSYSLOG is a programm that collects logfiles and send it via `netcat` to a serve
 1. download deb
 2. ``sudo apt install --fix-broken ./msyslog-client_*_all.deb``
 3. install server (docker-compose)
+
 ### setup manual
 clone this repo
 copy each to file to ist location
