@@ -11,7 +11,7 @@
  [![bash-lint](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml)
  [![shieldio-issues](https://img.shields.io/github/issues/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/issues)
 [![shieldio-pr](https://img.shields.io/github/issues-pr/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/pulls)
-[![shieldio-license](https://img.shields.io/badge/license-MIT-brightgreen)](./LICENSE)
+[![shieldio-license](https://img.shields.io/github/license/quotengrote/msyslog)](./LICENSE)
 ![shieldio-lastcommit](https://img.shields.io/github/last-commit/quotengrote/msyslog)
 [![build packages](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml)
 
