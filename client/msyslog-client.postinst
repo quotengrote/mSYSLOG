@@ -1,9 +1,0 @@
-#!/bin/bash
-
-useradd --no-create-home --user-group --shell /bin/bash msyslog-client || echo "User already exists." # "failed" sicher falls der Nutzer schon existiert
-
-chmod 750 /usr/local/sbin/msyslog-client.sh
-chmod 644 /etc/msyslog-client.conf
-
-chown msyslog-client:msyslog-client /usr/local/sbin/msyslog-client.sh
-chown msyslog-client:msyslog-client /etc/msyslog-client.conf
