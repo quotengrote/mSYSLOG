@@ -14,6 +14,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: msyslog-client_${{ GITHUB_SHA }}.deb # sha geht nciht
+          name: msyslog-client.deb # sha geht nciht
           path: ./build/msyslog-client.deb
           if-no-files-found: error
