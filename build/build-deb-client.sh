@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setze Variablen
 PACKAGE_NAME=msyslog-client
-BUILD_DIR=$GITHUB_WORKSPACE/$PACKAGE_NAME
+BUILD_DIR=$GITHUB_WORKSPACE/build
 
 # Installiere benötigte Pakete
 # sudo apt install dpkg -y
@@ -29,6 +29,8 @@ dpkg-deb --build . $PACKAGE_NAME_$GITHUB_SHA.deb
 
 # verschiebe gebautes Paket
 mv $PACKAGE_NAME_$GITHUB_SHA.deb ../$PACKAGE_NAME_$GITHUB_SHA.deb
+
+# debug
 pwd
 
 # Lösche "build"-Verzeichnis

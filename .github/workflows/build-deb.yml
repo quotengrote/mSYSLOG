@@ -8,9 +8,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
       - name: make script exectable
-        run: chmod +x build/build-deb-client.sh
+        run: chmod +x ${{ github.workspace }}/build/build-deb-client.sh
       - name: run script
-        run: build/build-deb-client.sh
+        run: ${{ github.workspace }}/build/build-deb-client.sh
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
