@@ -29,6 +29,7 @@ dpkg-deb --build . $PACKAGE_NAME.deb
 
 # verschiebe gebautes Paket
 mv $PACKAGE_NAME.deb ../$PACKAGE_NAME.deb
+pwd
 
 # Lösche "build"-Verzeichnis
 cd ..
