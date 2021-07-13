@@ -19,5 +19,6 @@ jobs:
           if-no-files-found: error
   install_deb_file:
     runs-on: ubuntu-20.04
+    steps:
       - name: run script
         run: sudo apt install --fix-broken ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
