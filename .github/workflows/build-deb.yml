@@ -17,14 +17,8 @@ jobs:
           name: msyslog-client_${{ github.sha }}.sh
           path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           if-no-files-found: error
-  install_deb_file:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: checkout
-        uses: actions/checkout@v1
       - name: run script
-        run: if test -f ${{ github.workspace }}/build/msyslog-client_${{ github.sha }}.deb; echo "Datei existiert"
       - name: install package
-        run: sudo apt install --fix-broken ${{ github.workspace }}/build/msyslog-client_${{ github.sha }}.deb
+        run: sudo apt install --fix-broken ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
       - name: check if install was successful
         run: msyslog-client --help
