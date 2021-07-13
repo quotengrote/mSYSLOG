@@ -20,6 +20,9 @@ jobs:
   install_deb_file:
     runs-on: ubuntu-20.04
     steps:
+      steps:
+      - name: checkout
+        uses: actions/checkout@v1
       - name: install package
         run: sudo apt install --fix-broken ${{ github.workspace }}/build/msyslog-client_${{ github.sha }}.deb
       - name: check if install was successful
