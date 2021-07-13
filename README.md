@@ -47,14 +47,14 @@ mSYSLOG is a programm that collects logfiles and send it via `netcat` to a serve
 
 ### Setup deb
 1. download deb
-2. ``sudo apt install --fix-broken ./msyslog-client_*_all.deb``
+2. ``sudo apt install --fix-broken ./msyslog-client*.deb``
 3. install server (docker-compose)
 
 ### setup manual
 clone this repo
 copy each to file to ist location
 sytemd?
-usewr?
+user?
 
 ## Usage client
 ```
@@ -90,3 +90,6 @@ log_receiver_port=12345
 
 ## License
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](./LICENSE) file for details.
+
+
+deinstall in doku
