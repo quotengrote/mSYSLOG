@@ -8,12 +8,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
       - name: make script exectable
-        run: chmod +x client/build-deb.sh
+        run: chmod +x build-deb-client.sh
       - name: run script
-        run: client/build-deb.sh
+        run: build/build-deb-client.sh
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: msyslog-client_$GITHUB_SHA.deb # sha geht nciht
-          path: ./client/*.deb
+          name: msyslog-client_${{ GITHUB_SHA }}.deb # sha geht nciht
+          path: ./build/msyslog-client.deb
           if-no-files-found: error
