@@ -9,7 +9,7 @@ Maintainer: Michael Grote <michael.grote@posteo.de>
 Description:  A simple centralized logging solution almost only with bash and gnu-tools.
 
 Depends: netcat-openbsd,figlet,expect
-Pre-Depends: netcat-openbsd,figlet,expect
+# Pre-Depends: netcat-openbsd,figlet,expect
 
 # Files: <pair of space-separated paths; First is file to include, second is destination>
 #  <more pairs, if there's more than one file to include. Notice the starting space>
