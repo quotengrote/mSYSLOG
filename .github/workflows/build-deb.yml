@@ -1,9 +1,8 @@
-name: build deb-files
+name: build packages
 on:
   push:
 jobs:
   build_deb_files:
-    name: Generate Debian Package
     runs-on: ubuntu-20.04
     steps:
       - name: checkout
