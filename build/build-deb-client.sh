@@ -25,7 +25,7 @@ chmod 0755 $BUILD_DIR/DEBIAN/postinst
 cd $BUILD_DIR
 
 # baue deb
-dpkg-deb --build . $PACKAGE_NAME_$GITHUB_SHA.deb
+dpkg-deb --build . msyslog-client_$GITHUB_SHA.deb
 
 # verschiebe gebautes Paket
 mv $PACKAGE_NAME_$GITHUB_SHA.deb ../$PACKAGE_NAME_$GITHUB_SHA.deb
