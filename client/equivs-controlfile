@@ -4,6 +4,7 @@ Homepage: https://github.com/quotengrote/mSYSLOG
 Standards-Version: 3.9.2
 Package: msyslog-client
 Version: 0.0.2
+Copyright: GNU GPL-3
 Maintainer: Michael Grote <michael.grote@posteo.de>
 Description:  A simple centralized logging solution almost only with bash and gnu-tools.
 
@@ -23,7 +24,6 @@ Files: msyslog-client.sh /usr/local/sbin
 # Replaces: <comma-separated list of packages>
 # Architecture: all
 # Multi-Arch: <one of: foreign|same|allowed>
-# Copyright: MIT ANPASSEN!
 # Changelog: <changelog file; defaults to a generic changelog>
 # Readme: <README.Debian file; defaults to a generic one>
 # Extra-Files: <comma-separated list of additional files for the doc directory>
