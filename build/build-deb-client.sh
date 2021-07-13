@@ -1,6 +1,5 @@
 #!/bin/bash
 # Setze Variablen
-PACKAGE_NAME=msyslog-client
 BUILD_DIR=$GITHUB_WORKSPACE/build
 
 # Installiere benötigte Pakete
@@ -14,8 +13,8 @@ mkdir -p $BUILD_DIR/usr/local/sbin
 
 # kopiere Dateien an vorgesehe Verzeichnisse im Zielsystem
 cp $GITHUB_WORKSPACE/client/dpkg-deb-controlfile $BUILD_DIR/DEBIAN/control
-cp $GITHUB_WORKSPACE/client/msyslog-client.sh $BUILD_DIR/usr/local/sbin/$PACKAGE_NAME.sh
-cp $GITHUB_WORKSPACE/client/msyslog-client.conf $BUILD_DIR/etc/$PACKAGE_NAME.conf
+cp $GITHUB_WORKSPACE/client/msyslog-client.sh $BUILD_DIR/usr/local/sbin/msyslog-client.sh
+cp $GITHUB_WORKSPACE/client/msyslog-client.conf $BUILD_DIR/etc/msyslog-client.conf
 cp $GITHUB_WORKSPACE/client/dpkg-deb-postinst $BUILD_DIR/DEBIAN/postinst
 
 # Setze Rechte für postinst-Script
@@ -28,11 +27,11 @@ cd $BUILD_DIR
 dpkg-deb --build . msyslog-client_$GITHUB_SHA.deb
 
 # verschiebe gebautes Paket
-mv $PACKAGE_NAME_$GITHUB_SHA.deb ../$PACKAGE_NAME_$GITHUB_SHA.deb
+mv msyslog-client_$GITHUB_SHA.deb ../msyslog-client_$GITHUB_SHA.deb
 
 # debug
 pwd
 
 # Lösche "build"-Verzeichnis
 cd ..
-# rm -rf ./$PACKAGE_NAME
+# rm -rf ./$BUILD_DIR
