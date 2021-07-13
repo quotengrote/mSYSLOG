@@ -15,5 +15,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: msyslog-client.deb
-          path: ./build/msyslog-client*.deb
+          path: ./build/*.deb
           if-no-files-found: error
