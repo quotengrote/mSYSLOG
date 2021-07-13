@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
+      - name: run script
+        run: if test -f ${{ github.workspace }}/build/msyslog-client_${{ github.sha }}.deb; echo "Datei existiert"
       - name: install package
         run: sudo apt install --fix-broken ${{ github.workspace }}/build/msyslog-client_${{ github.sha }}.deb
       - name: check if install was successful
