@@ -4,7 +4,7 @@ Homepage: https://github.com/quotengrote/mSYSLOG
 Standards-Version: 3.9.2
 Package: msyslog-client
 Version: 0.0.2
-Copyright: GNU GPL-3
+Copyright: GPL3
 Maintainer: Michael Grote <michael.grote@posteo.de>
 Description:  A simple centralized logging solution almost only with bash and gnu-tools.
 
