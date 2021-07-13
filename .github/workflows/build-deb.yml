@@ -8,7 +8,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
       - name: make script exectable
-        run: chmod +x build-deb-client.sh
+        run: chmod +x build/build-deb-client.sh
       - name: run script
         run: build/build-deb-client.sh
       - name: Upload artifact
