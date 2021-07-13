@@ -11,11 +11,25 @@
  [![bash-lint](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml)
  [![shieldio-issues](https://img.shields.io/github/issues/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/issues)
 [![shieldio-pr](https://img.shields.io/github/issues-pr/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/pulls)
-[![shieldio-license](https://img.shields.io/badge/license-MIT-brightgreen)](./LICENSE)
+[![shieldio-license](https://img.shields.io/github/license/quotengrote/msyslog)](./LICENSE)
 ![shieldio-lastcommit](https://img.shields.io/github/last-commit/quotengrote/msyslog)
 [![build packages](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml)
 
 ## Table of contents
+<!-- TOC START min:1 max:3 link:true asterisk:false update:true -->
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Getting started](#getting-started)
+    - [Dependencies](#dependencies)
+    - [Setup deb](#setup-deb)
+    - [setup manual](#setup-manual)
+  - [Usage client](#usage-client)
+  - [Example client Configuration](#example-client-configuration)
+  - [Usage server](#usage-server)
+  - [License](#license)
+<!-- TOC END -->
+
+
 
 ## Introduction
 mSYSLOG is a programm that collects logfiles and send it via `netcat` to a server.
@@ -33,12 +47,16 @@ mSYSLOG is a programm that collects logfiles and send it via `netcat` to a serve
 
 ### Setup deb
 1. download deb
-2. install it
+2. ``sudo apt install --fix-broken ./msyslog-client_*_all.deb``
 3. install server (docker-compose)
-### setup manual
-xxxx
 
-## Usage
+### setup manual
+clone this repo
+copy each to file to ist location
+sytemd?
+usewr?
+
+## Usage client
 ```
 Usage: msyslog-client.sh [OPTIONS]
 
@@ -54,7 +72,7 @@ Options:
 
 ```
 
-## Example Configuration
+## Example client Configuration
 ```
 # configfile for msyslog-client
 
@@ -66,6 +84,9 @@ log_receiver_fqdn=acng.grote.lan
 log_receiver_port=12345
 
 ```
+
+## Usage server
+``ncat -l -k  -p 12345``
 
 ## License
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](./LICENSE) file for details.
