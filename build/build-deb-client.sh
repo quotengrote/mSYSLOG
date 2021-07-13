@@ -1,6 +1,6 @@
 #!/bin/bash
 # Setze Variablen
-PACKAGE_NAME=msyslog-client_$GITHUB_SHA
+PACKAGE_NAME=msyslog-client
 BUILD_DIR=$GITHUB_WORKSPACE/$PACKAGE_NAME
 
 # Installiere benötigte Pakete
@@ -25,10 +25,10 @@ chmod 0755 $BUILD_DIR/DEBIAN/postinst
 cd $BUILD_DIR
 
 # baue deb
-dpkg-deb --build . $PACKAGE_NAME.deb
+dpkg-deb --build . $PACKAGE_NAME_$GITHUB_SHA.deb
 
 # verschiebe gebautes Paket
-mv $PACKAGE_NAME.deb ../$PACKAGE_NAME.deb
+mv $PACKAGE_NAME_$GITHUB_SHA.deb ../$PACKAGE_NAME_$GITHUB_SHA.deb
 pwd
 
 # Lösche "build"-Verzeichnis
