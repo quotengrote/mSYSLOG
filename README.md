@@ -64,7 +64,7 @@ Usage: msyslog-client.sh [OPTIONS]
 
 Options:
     -h, --help                  Displays this text.
-    -s, --status                Display the current status of the script.
+    -s, --status                Displays the current status of the script.
     stop                        Stops the script and all of its child-processes.
     restart                     Restarts the script and all of its child-processes.
     start, without a option     Starts the script and all of its child-processes.
@@ -72,7 +72,7 @@ Options:
 
 ```
 
-## Example client Configuration
+### Example client Configuration
 ```
 # configfile for msyslog-client
 
@@ -87,6 +87,10 @@ log_receiver_port=12345
 
 ## Usage server
 ``ncat -l -k  -p 12345``
+
+
+## Build
+The client packages get build with [GitHub Actions](./.github/workflows/build-deb.yml) and dpkg-deb.
 
 ## License
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](./LICENSE) file for details.
