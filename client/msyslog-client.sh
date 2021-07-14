@@ -1,16 +1,19 @@
 #!/bin/bash
 
-# set vars
+# setze Variablen
 config_file="/etc/msyslog-client.conf"
 pid_file="/var/run/msyslog-client.pid"
 
+# setze Variable FQDN
 function set_fqdn {
     domain=$(resolvectl status | awk '/DNS Domain/ { print $3}')
     fqdn=$(hostname).$domain
 }
+# kombiniere FQDN mit Logfilename
 function set_prefix {
     sed "s/^/$i/;s/^/$fqdn\: /" "$1"
 }
+# Lese Config aus Datei aus und speichere in Variablen
 function get_config_from_file {
     # lese/binde ein config ein
     if test -f "$config_file"; then
@@ -36,7 +39,7 @@ Usage: msyslog-client.sh [OPTIONS]
 
 Options:
     -h, --help                  Displays this text.
-    -s, --status                Display the current status of the script.
+    -s, --status                Displays the current status of the script.
     stop                        Stops the script and all of its child-processes.
     restart                     Restarts the script and all of its child-processes.
     start, without a option     Starts the script and all of its child-processes.
