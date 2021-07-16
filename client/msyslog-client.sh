@@ -21,6 +21,7 @@ function get_config_from_file {
         log_receiver_port=$(awk -F"=" '/log_receiver_port=/ { print $2 }' $config_file)
         log_receiver_fqdn=$(awk -F"=" '/log_receiver_fqdn=/ { print $2 }' $config_file)
         # erstelle array "logfile_paths"
+        # shellcheck disable=2046
         IFS=',' read -r -a logfile_paths <<< $( awk -F"=" '/logfiles=/ { print $2 }' $config_file)
         # erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
         # leerzeichen erlaubt, werte kmma getrennt
@@ -89,6 +90,7 @@ function start_logging {
         do
             # start processes in background
             # starte jeden prozess in einer subshell und schreibe die pid in eine datei
+            # shellcheck disable=2016
         	  (tail --lines=0 --follow "$i" & echo $! >> "$pid_file") | (stdbuf -oL -eL awk -v prefix="$fqdn $i" '{print prefix $0}' & echo $! >> "$pid_file") | nc "$log_receiver_fqdn" "$log_receiver_port" & echo $! >> "$pid_file" &
             #https://unix.stackexchange.com/questions/25372/turn-off-buffering-in-pipe
         done
