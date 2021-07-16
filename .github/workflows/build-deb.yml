@@ -23,7 +23,7 @@ jobs:
       - name: enable systemd-unit
         run: sudo systemctl enable msyslog-client.service
       - name: start systemd-unit
-        run: sudo systemctl status msyslog-client.service
+        run: sudo systemctl start msyslog-client.service
       - name: get status of systemd-unit
         run: sudo systemctl status msyslog-client.service
       - name: check if install was successful
