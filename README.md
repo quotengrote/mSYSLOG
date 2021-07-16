@@ -8,12 +8,12 @@
 
  A simple centralized logging solution almost only with bash and gnu-tools.
 
- [![bash-lint](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml)
- [![shieldio-issues](https://img.shields.io/github/issues/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/issues)
+[![bash-lint](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml/badge.svg?branch=master)](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml)
+[![shieldio-issues](https://img.shields.io/github/issues/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/issues)
 [![shieldio-pr](https://img.shields.io/github/issues-pr/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/pulls)
 [![shieldio-license](https://img.shields.io/github/license/quotengrote/msyslog)](./LICENSE)
 ![shieldio-lastcommit](https://img.shields.io/github/last-commit/quotengrote/msyslog)
-[![build packages](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml/badge.svg)](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml)
+[![build packages](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml/badge.svg?branch=master)](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml)
 
 ## Table of contents
 <!-- TOC START min:1 max:3 link:true asterisk:false update:true -->
