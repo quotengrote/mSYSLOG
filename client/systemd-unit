@@ -1,5 +1,5 @@
 [Unit]
-Description=A simple centralized logging solution almost only with bash and gnu-tools.
+Description=msyslog-client
 
 [Service]
 ExecStart=/usr/local/sbin/msyslog-client.sh start
