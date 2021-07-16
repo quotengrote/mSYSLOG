@@ -10,3 +10,6 @@ chmod 644 /etc/msyslog-client.conf
 # Setze Besitzer und Gruppe
 chown msyslog-client:msyslog-client /usr/local/sbin/msyslog-client.sh
 chown msyslog-client:msyslog-client /etc/msyslog-client.conf
+
+# aktiviere systemd-unit
+systemctl enable msyslog-client.service
