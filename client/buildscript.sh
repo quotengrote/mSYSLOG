@@ -23,6 +23,7 @@ cp "$GITHUB_WORKSPACE"/client/systemd-unit "$BUILD_DIR"/etc/systemd/system/msysl
 chmod 0755 "$BUILD_DIR"/DEBIAN/postinst
 
 # Wechsel in "build"-Verzeichnis
+# shellcheck disable=2164
 cd "$BUILD_DIR"
 
 # baue deb
