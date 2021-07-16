@@ -29,11 +29,13 @@ cd $BUILD_DIR
 dpkg-deb --build . msyslog-client_$GITHUB_SHA.deb
 
 # verschiebe gebautes Paket
-mv msyslog-client_$GITHUB_SHA.deb ../msyslog-client_$GITHUB_SHA.deb
+mv msyslog-client_$GITHUB_SHA.deb $GITHUB_WORKSPACE/msyslog-client_$GITHUB_SHA.deb
 
-# debug
-pwd
-
-# Lösche "build"-Verzeichnis
-cd ..
-# rm -rf ./$BUILD_DIR
+### Tests ###
+sudo apt install sudo apt install --fix-broken $GITHUB_WORKSPACE/msyslog-client_$GITHUB_SHA.deb -y
+sudo systemctl enable msyslog-client.service
+sudo systemctl start msyslog-client.service
+sudo systemctl status msyslog-client.service
+sudo msyslog-client.sh --help
+sudo systemctl restart msyslog-client.service
+sudo systemctl status msyslog-client.service
