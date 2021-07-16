@@ -125,9 +125,3 @@ case "$1" in
 esac
 
 exit 0
-
-
-# Error2
-# LogFile in key "logfiles" not found
-# Error1
-# Config file not found
