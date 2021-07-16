@@ -33,16 +33,15 @@ function get_config_from_file {
 function output_help {
     figlet mSYSLOG
     cat <<EOF
-Usage: msyslog-client.sh [OPTIONS]
-
-    Manages the msyslog-client.
+Usage:
+  - msyslog-client.sh [OPTIONS]
+  - systemctl start|stop|restart|status msyslog-client.service
 
 Options:
     -h, --help                  Displays this text.
     -s, --status                Displays the current status of the script.
-    stop                        Stops the script and all of its child-processes.
-    restart                     Restarts the script and all of its child-processes.
-    start, without a option     Starts the script and all of its child-processes.
+
+
 EOF
 }
 
