@@ -2,7 +2,7 @@
 
 # setze Variablen
 config_file="/etc/msyslog-client.conf"
-pid_file="/var/run/msyslog-client.pid"
+pid_file="/run/msyslog-client.pid"
 
 # setze Variable FQDN
 function set_fqdn {

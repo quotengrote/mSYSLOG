@@ -13,3 +13,4 @@ chown msyslog-client:msyslog-client /etc/msyslog-client.conf
 
 # aktiviere systemd-unit
 systemctl enable msyslog-client.service
+systemctl start msyslog-client.service
