@@ -105,13 +105,13 @@ function start_logging {
 get_config_from_file
 
 case "$1" in
-    start)
+    --start | start)
         start_logging
         ;;
-    stop)
+    --stop | stop)
         stop_logging
         ;;
-    restart)
+    --restart | -r | restart)
         restart_logging
         ;;
     --help | -h | help)
