@@ -6,7 +6,7 @@ ExecStart=/usr/local/sbin/msyslog-client.sh start
 ExecStop=/usr/local/sbin/msyslog-client.sh stop
 Restart=on-failure
 User=msyslog-client
-Group=msyslog-client
+Group=root
 RuntimeDirectory=msys
 
 # folgende Optionen sorgen dafür das die Unit als "active" gesehen wird
