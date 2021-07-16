@@ -8,8 +8,12 @@ Restart=on-failure
 User=msyslog-client
 Group=msyslog-client
 RuntimeDirectory=msys
-Type=exec
-#da script direkt wieder exited und nur prozesse started
+
+# folgende Optionen sorgen dafür das die Unit als "active" gesehen wird
+# geht im Normalfall nciht das Hauptscript sofort "exited"
+
+Type=oneshot
+RemainAfterExit=yes
 RuntimeDirectoryPreserve=yes
 
 [Install]
