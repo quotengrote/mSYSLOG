@@ -4,9 +4,9 @@ Description=A simple centralized logging solution almost only with bash and gnu-
 [Service]
 ExecStart=/usr/local/sbin/msyslog-client.sh start
 Restart=on-failure
-PIDFile=/var/run/msyslog-client.pid
 User=msyslog-client
-RuntimeDirectory=msyslog-client
+Group=msyslog-client
+RuntimeDirectory=msys
 
 [Install]
 WantedBy=multi-user.target
