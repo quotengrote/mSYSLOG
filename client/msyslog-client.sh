@@ -99,10 +99,10 @@ function start_logging {
 get_config_from_file
 
 case "$1" in
-    --start | start)
+    start)
         start_logging
         ;;
-    --stop | stop)
+    stop)
         stop_logging
         ;;
     --help | -h | help)
@@ -112,7 +112,7 @@ case "$1" in
         output_status
         ;;
     *)
-        start_logging
+        output_status
 esac
 
 exit 0
