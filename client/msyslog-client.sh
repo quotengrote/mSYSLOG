@@ -74,13 +74,13 @@ function stop_logging {
         kill "$(cat $pid_file)" &>/dev/null
         # remove pid
         rm "$pid_file"
-    else
-        echo "script is not running"
+    #else
+    #    echo "script is not running"
     fi
 }
 function start_logging {
     if test -f "$pid_file"; then
-        echo "script is already running"
+        #echo "script is already running"
     else
         check_logfile_paths # funktion
         set_fqdn
