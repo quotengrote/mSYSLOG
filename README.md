@@ -36,57 +36,50 @@ mSYSLOG is a programm that collects logfiles and send it via `netcat` to a serve
 
 ## Getting started
 
-### Dependencies
-#### Server
-* ``ncat``
-
-#### Client
-* ``netcat-openbsd ``
-* ``figlet``
-* ``expect``
-
-### Setup deb
+### install msyslog-client
 1. download deb
 2. ``sudo apt install --fix-broken ./msyslog-client*.deb``
-3. install server (docker-compose)
+3. check if service is running ``systemctl status msyslog-client.service``
 
-### setup manual
-clone this repo
-copy each to file to ist location
-sytemd?
-user?
+### remove msyslog-client
+1. ``apt remove --purge msyslog-client``
 
 ## Usage client
 ```
-Usage: msyslog-client.sh [OPTIONS]
-
-    Manages the msyslog-client.
+Usage:
+  - msyslog-client.sh [OPTIONS]
+  - systemctl start|stop|restart|status msyslog-client.service
 
 Options:
     -h, --help                  Displays this text.
     -s, --status                Displays the current status of the script.
-    stop                        Stops the script and all of its child-processes.
-    restart                     Restarts the script and all of its child-processes.
-    start, without a option     Starts the script and all of its child-processes.
-
-
 ```
+
 
 ### Example client Configuration
 ```
 # configfile for msyslog-client
 
 # files whose contents should be sent(comma-separated)
-logfiles=/var/log/syslog,/var/log/kern.log,/var/log/messages,/var/log/x xx,/var/log/secure
+logfiles=/var/log/syslog,/var/log/messages,/var/log/test file,/var/log/secure
 
 # fqdn and port to which the data should get send
-log_receiver_fqdn=acng.grote.lan
+log_receiver_fqdn=acng.server
 log_receiver_port=12345
 
 ```
 
+### Troubleshooting
+#### Error1
+Problem: config file not found at `/etc/msyslog-client.conf`
+Solution: create [configfile](#example-client-configuration)
+#### Error2
+Problem: specified logfile not found
+Solution: confirm all specified logfiles are existent
+
+
 ## Usage server
-``ncat -l -k  -p 12345``
+``ncat -l -k -p 12345``
 
 
 ## Build

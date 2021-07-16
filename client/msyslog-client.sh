@@ -2,7 +2,7 @@
 
 # setze Variablen
 config_file="/etc/msyslog-client.conf"
-pid_file="/var/run/msyslog-client.pid"
+pid_file="/run/msys/msyslog-client.pid"
 
 # setze Variable FQDN
 function set_fqdn {
@@ -33,16 +33,15 @@ function get_config_from_file {
 function output_help {
     figlet mSYSLOG
     cat <<EOF
-Usage: msyslog-client.sh [OPTIONS]
-
-    Manages the msyslog-client.
+Usage:
+  - msyslog-client.sh [OPTIONS]
+  - systemctl start|stop|restart|status msyslog-client.service
 
 Options:
     -h, --help                  Displays this text.
     -s, --status                Displays the current status of the script.
-    stop                        Stops the script and all of its child-processes.
-    restart                     Restarts the script and all of its child-processes.
-    start, without a option     Starts the script and all of its child-processes.
+
+
 EOF
 }
 
@@ -67,12 +66,7 @@ function output_status {
         echo "script is not running"
     fi
 }
-function restart_logging {
-    if test -f "$pid_file"; then
-        stop_logging # funktionen
-    fi
-    start_logging # funktionen
-}
+
 function stop_logging {
     # checkif process is running
     if test -f "$pid_file"; then
@@ -111,23 +105,14 @@ case "$1" in
     stop)
         stop_logging
         ;;
-    restart)
-        restart_logging
-        ;;
-    --help | -h)
+    --help | -h | help)
         output_help
         ;;
-    --status | -s)
+    --status | -s | status)
         output_status
         ;;
     *)
-        start_logging
+        output_status
 esac
 
 exit 0
-
-
-# Error2
-# LogFile in key "logfiles" not found
-# Error1
-# Config file not found

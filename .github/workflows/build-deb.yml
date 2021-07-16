@@ -8,17 +8,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
       - name: make script exectable
-        run: chmod +x ${{ github.workspace }}/build/build-deb-client.sh
+        run: chmod +x ${{ github.workspace }}/client/buildscript.sh
       - name: run script
-        run: ${{ github.workspace }}/build/build-deb-client.sh
+        run: ${{ github.workspace }}/client/buildscript.sh
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: msyslog-client_${{ github.sha }}.sh
           path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           if-no-files-found: error
-        # install and check
-      - name: install package
-        run: sudo apt install --fix-broken ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb -y
-      - name: check if install was successful
-        run: sudo msyslog-client.sh --help
