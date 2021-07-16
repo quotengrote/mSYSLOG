@@ -22,5 +22,7 @@ jobs:
         run: sudo apt install --fix-broken ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb -y
       - name: activate systemd-unit
         run: sudo systemctl enable msyslog-client.service
+      - name: activate systemd-unit
+        run: sudo systemctl status msyslog-client.service
       - name: check if install was successful
         run: sudo msyslog-client.sh --help
