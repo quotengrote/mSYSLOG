@@ -72,9 +72,12 @@ log_receiver_port=12345
 ### Troubleshooting
 #### Error1
 Problem: config file not found at `/etc/msyslog-client.conf`
+
 Solution: create [configfile](#example-client-configuration)
+
 #### Error2
 Problem: specified logfile not found
+
 Solution: confirm all specified logfiles are existent
 
 
