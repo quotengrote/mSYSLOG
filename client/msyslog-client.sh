@@ -66,12 +66,7 @@ function output_status {
         echo "script is not running"
     fi
 }
-function restart_logging {
-    if test -f "$pid_file"; then
-        stop_logging # funktionen
-    fi
-    start_logging # funktionen
-}
+
 function stop_logging {
     # checkif process is running
     if test -f "$pid_file"; then
@@ -109,9 +104,6 @@ case "$1" in
         ;;
     --stop | stop)
         stop_logging
-        ;;
-    --restart | -r | restart)
-        restart_logging
         ;;
     --help | -h | help)
         output_help
