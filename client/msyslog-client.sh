@@ -95,7 +95,7 @@ function start_logging {
         do
             # start processes in background
             # starte jeden prozess in einer subshell und schreibe die pid in eine datei
-        	  (tail --lines=0 --follow "$i" & echo $! >> "$pid_file") | (stdbuf -oL -eL awk -v prefix="$fqdn $i" '{print prefix $0}' & echo $! >> "$pid_file") | nc "$log_receiver_fqdn" "$log_receiver_port" & echo $! >> "$pid_file" &
+        	  (tail --lines=0 --follow "$i" && echo $! >> "$pid_file") | (stdbuf -oL -eL awk -v prefix="$fqdn $i" '{print prefix $0}' && echo $! >> "$pid_file") | nc "$log_receiver_fqdn" "$log_receiver_port" && echo $! >> "$pid_file" &
             #https://unix.stackexchange.com/questions/25372/turn-off-buffering-in-pipe
         done
     fi
