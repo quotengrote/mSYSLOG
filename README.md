@@ -86,7 +86,7 @@ log_receiver_port=12345
 ```
 
 ## Usage server
-``ncat -l -k  -p 12345``
+``ncat -l -k -p 12345``
 
 
 ## Build
@@ -97,3 +97,8 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 
 deinstall in doku
+
+# Error2
+# LogFile in key "logfiles" not found
+# Error1
+# Config file not found
