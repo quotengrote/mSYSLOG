@@ -114,10 +114,10 @@ case "$1" in
     restart)
         restart_logging
         ;;
-    --help | -h)
+    --help | -h | help)
         output_help
         ;;
-    --status | -s)
+    --status | -s | status)
         output_status
         ;;
     *)
