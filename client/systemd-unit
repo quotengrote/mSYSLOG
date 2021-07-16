@@ -3,11 +3,14 @@ Description=A simple centralized logging solution almost only with bash and gnu-
 
 [Service]
 ExecStart=/usr/local/sbin/msyslog-client.sh start
+ExecStop=/usr/local/sbin/msyslog-client.sh stop
 Restart=on-failure
 User=msyslog-client
 Group=msyslog-client
 RuntimeDirectory=msys
-Type=oneshot #da script direkt wieder exited und nur prozesse started
+Type=exec
+#da script direkt wieder exited und nur prozesse started
+RuntimeDirectoryPreserve=yes
 
 [Install]
 WantedBy=multi-user.target
