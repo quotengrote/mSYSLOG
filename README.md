@@ -80,6 +80,20 @@ Problem: specified logfile not found
 
 Solution: confirm all specified logfiles are existent
 
+#### Error3
+Problem: $log_receiver_port ist not set
+
+Solution: set variable in config file
+
+#### Error4
+Problem: $log_receiver_fqdn ist not set
+
+Solution: set variable in config file
+
+#### Error5
+Problem: no logiles are set
+
+Solution: set logfiles in config file
 
 ## Usage server
 ``ncat -l -k -p 12345``

@@ -26,6 +26,20 @@ function get_config_from_file {
         # erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
         # leerzeichen erlaubt, werte kmma getrennt
         # awk: nimm alles hinter name= als eine variable
+
+        # prüfe ob variablen nicht leer sind
+        if test -z "$log_receiver_port"; then
+            echo "Error3"
+            exit 3
+        fi
+        if test -z "$log_receiver_fqdn"; then
+            echo "Error4"
+            exit 4
+        fi
+        if test -z "${logfile_paths[@]}"; then
+            echo "Error5"
+            exit 5
+        fi
     else
         echo "Error1: No config at" "$config_file"
         exit 1
