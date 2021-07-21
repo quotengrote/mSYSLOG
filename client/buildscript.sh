@@ -47,3 +47,7 @@ sudo msyslog-client.sh --status
 echo "### Debug"
 pwd
 ls /home
+dpkg-deb --info "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
+dpkg-deb --show "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
+dpkg-deb --field "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
+dpkg-deb --contents "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
