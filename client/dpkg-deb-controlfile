@@ -1,9 +1,9 @@
 Package: msyslog-client
-Version: 0.0.15
+Version: 0.0.16
 Section: custom
 Priority: optional
 Architecture: all
 Essential: no
 Maintainer: Michael Grote <michael.grote@posteo.de>
 Description: A simple centralized logging solution almost only with bash and gnu-tools.
-Depends: netcat-openbsd,figlet,expect
+Depends: ncat,figlet,expect
