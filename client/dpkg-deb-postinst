@@ -1,8 +1,13 @@
 #!/bin/bash
 
 # Erstelle Nutzer für...
-echo "add user"
-useradd --no-create-home --user-group --shell /bin/bash msyslog-client || echo "User already exists." # "failed" sicher falls der Nutzer schon existiert
+if id "msyslog-client" &>/dev/null; then
+    echo 'User already exists.'
+else
+    echo "add user"
+    useradd --no-create-home --user-group --shell /bin/bash msyslog-client
+fi
+
 
 # sichere alte Konfiguration zurueck
 if test -f "/etc/msyslog-client.conf.update"; then
