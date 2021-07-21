@@ -3,6 +3,9 @@
 # Erstelle Nutzer für...
 useradd --no-create-home --user-group --shell /bin/bash msyslog-client || echo "User already exists." # "failed" sicher falls der Nutzer schon existiert
 
+# sichere alte Konfiguration zurueck
+mv /etc/msyslog-client.conf.update /etc/msyslog-client.conf
+
 # Setze Rechte
 chmod 750 /usr/local/sbin/msyslog-client.sh
 chmod 644 /etc/msyslog-client.conf

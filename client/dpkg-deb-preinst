@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# sichere alte Konfiguration
+mv /etc/msyslog-client.conf /etc/msyslog-client.conf.update
