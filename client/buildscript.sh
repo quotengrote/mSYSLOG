@@ -67,7 +67,7 @@ sudo msyslog-client.sh --status
 # mit config und leerer fqdn variable
 echo "unset log_receiver_fqdn"
 sudo rm /etc/msyslog-client.conf
-sudo cat <<'EOF' >> /etc/msyslog-client.conf
+sudo cat <<'EOF' | sudo tee -a /etc/msyslog-client.conf
 # configfile for msyslog-client
 
 # files whose contents should be sent(comma-separated)
@@ -87,7 +87,7 @@ sudo msyslog-client.sh --status
 # mit config und leerer logfiles variable
 echo "unset logfiles"
 sudo rm /etc/msyslog-client.conf
-sudo cat <<'EOF' >> /etc/msyslog-client.conf
+sudo cat <<'EOF' | sudo tee -a /etc/msyslog-client.conf
 # configfile for msyslog-client
 
 # files whose contents should be sent(comma-separated)
