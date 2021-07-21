@@ -1,7 +1,4 @@
 #!/bin/bash
-# Setze Variablen
-BUILD_DIR="$GITHUB_WORKSPACE"/build
-
 echo "install ncat"
 sudo apt install ncat
 
