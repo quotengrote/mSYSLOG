@@ -17,7 +17,7 @@ jobs:
           name: msyslog-client_${{ github.sha }}.sh
           path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           if-no-files-found: error
-  install_and_test_client:
+  test0_client:
     runs-on: ubuntu-20.04
     needs: build_deb
     steps:
@@ -29,9 +29,40 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/base.sh
+  test1_client:
+    runs-on: ubuntu-20.04
+    needs: build_deb
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_config.sh
       - name: run script
+  test2_client:
+    runs-on: ubuntu-20.04
+    needs: build_deb
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
+      - name: run script
         run: ${{ github.workspace }}/client/tests/without_logfiles.sh
+  test3_client:
+    runs-on: ubuntu-20.04
+    needs: build_deb
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_log_receiver_fqdn.sh
