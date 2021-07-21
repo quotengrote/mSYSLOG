@@ -58,6 +58,7 @@ function check_logfile_paths {
 function output_status {
     # checkif process is running
     if test -f "$pid_file"; then
+        echo "server & port:" $log_receiver_fqdn:$log_receiver_port
         echo "config-file:" $config_file
         echo "pid-file:" $pid_file
         echo "running processes:"
