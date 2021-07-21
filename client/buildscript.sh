@@ -43,3 +43,7 @@ sudo msyslog-client.sh --help
 sudo systemctl restart msyslog-client.service
 sudo systemctl status msyslog-client.service
 sudo msyslog-client.sh --status
+
+echo "### Debug"
+pwd
+ls /home
