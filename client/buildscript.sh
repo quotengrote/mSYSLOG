@@ -2,9 +2,6 @@
 # Setze Variablen
 BUILD_DIR="$GITHUB_WORKSPACE"/build
 
-# Installiere benötigte Pakete
-# sudo apt install dpkg -y
-
 echo "### Erstelle Ordnerstruktur"
 mkdir -p "$BUILD_DIR"
 mkdir -p "$BUILD_DIR"/DEBIAN
