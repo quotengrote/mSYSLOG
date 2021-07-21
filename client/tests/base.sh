@@ -22,7 +22,7 @@ echo "msyslog status"
 sudo systemctl status msyslog-client.service
 
 echo "msyslog help"
-sudo msyslog-client.sh --help
+sudo /usr/local/sbin/msyslog-client.sh --help
 
 echo "restart service"
 sudo systemctl restart msyslog-client.service
@@ -31,4 +31,4 @@ echo "msyslog status"
 sudo systemctl status msyslog-client.service
 
 echo "msyslog status"
-sudo msyslog-client.sh --status
+sudo /usr/local/sbin/msyslog-client.sh --status
