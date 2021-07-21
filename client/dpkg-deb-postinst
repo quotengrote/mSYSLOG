@@ -8,7 +8,6 @@ else
     useradd --no-create-home --user-group --shell /bin/bash msyslog-client
 fi
 
-
 # sichere alte Konfiguration zurueck
 if test -f "/etc/msyslog-client.conf.update"; then
     echo "restore configuration"
