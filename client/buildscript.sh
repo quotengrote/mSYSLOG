@@ -48,7 +48,7 @@ echo "### Debug"
 echo pwd
 pwd
 echo ls
-ls /home
+ls /home/runner
 echo info
 dpkg-deb --info "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
 echo show
