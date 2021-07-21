@@ -37,6 +37,7 @@ dpkg-deb --contents "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
 
 
 # Tests
+ncat servr öffnen
 # nach install
 echo "Install package"
 sudo apt install --fix-broken "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb -y
@@ -52,7 +53,7 @@ echo "restart service"
 sudo systemctl restart msyslog-client.service
 echo "msyslog status"
 sudo systemctl status msyslog-client.service
-echo "msyslog status without systemctl"
+echo "msyslog status"
 sudo msyslog-client.sh --status
 
 # ohne config
@@ -61,14 +62,12 @@ sudo rm /etc/msyslog-client.conf
 echo "restart service"
 sudo systemctl restart msyslog-client.service
 echo "msyslog status"
-sudo systemctl status msyslog-client.service
-echo "msyslog status without systemctl"
 sudo msyslog-client.sh --status
 
 # mit config und leerer fqdn variable
 echo "unset log_receiver_fqdn"
 sudo rm /etc/msyslog-client.conf
-cat <<'EOF' >> /etc/msyslog-client.conf
+sudo cat <<'EOF' >> /etc/msyslog-client.conf
 # configfile for msyslog-client
 
 # files whose contents should be sent(comma-separated)
@@ -83,14 +82,12 @@ EOF
 echo restart service
 sudo systemctl restart msyslog-client.service
 echo msyslog status
-sudo systemctl status msyslog-client.service
-echo msyslog status without systemctl
 sudo msyslog-client.sh --status
 
 # mit config und leerer logfiles variable
 echo "unset logfiles"
 sudo rm /etc/msyslog-client.conf
-cat <<'EOF' >> /etc/msyslog-client.conf
+sudo cat <<'EOF' >> /etc/msyslog-client.conf
 # configfile for msyslog-client
 
 # files whose contents should be sent(comma-separated)
@@ -102,9 +99,9 @@ log_receiver_port=12345
 
 
 EOF
-echo restart service
+echo "restart service"
 sudo systemctl restart msyslog-client.service
-echo msyslog status
+echo "msyslog status"
 sudo systemctl status msyslog-client.service
-echo msyslog status without systemctl
+echo "msyslog status"
 sudo msyslog-client.sh --status
