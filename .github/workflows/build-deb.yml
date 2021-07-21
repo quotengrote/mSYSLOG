@@ -2,18 +2,35 @@ name: build packages
 on:
   push:
 jobs:
-  build_deb_file:
+  build_deb:
     runs-on: ubuntu-20.04
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: make script exectable
-        run: chmod +x ${{ github.workspace }}/client/buildscript.sh
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/build.sh
       - name: run script
-        run: ${{ github.workspace }}/client/buildscript.sh
+        run: ${{ github.workspace }}/client/build.sh
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: msyslog-client_${{ github.sha }}.sh
           path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           if-no-files-found: error
+  install_and_test_client:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/base.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/without_config.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/without_logfiles.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/without_log_receiver_fqdn.sh
