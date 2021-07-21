@@ -7,7 +7,7 @@ ExecStop=/usr/local/sbin/msyslog-client.sh stop
 Restart=on-failure
 RuntimeDirectory=msys
 
-# folgende Optionen sorgen dafür das die Unit als "active" gesehen wird
+# folgende Optionen sorgen dafür das die Unit als "active" gesehen wird,
 # geht im Normalfall nicht da das Hauptscript sofort "exited"
 Type=oneshot
 RemainAfterExit=yes

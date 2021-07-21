@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# sichere alte Konfiguration
+if test -f "/etc/msyslog-client.conf"; then
+    echo "backup configuration"
+    mv /etc/msyslog-client.conf /etc/msyslog-client.conf.update
+fi

@@ -1,16 +1,30 @@
 #!/bin/bash
 
 # Erstelle Nutzer für...
-useradd --no-create-home --user-group --shell /bin/bash msyslog-client || echo "User already exists." # "failed" sicher falls der Nutzer schon existiert
+if id "msyslog-client" &>/dev/null; then
+    echo 'User already exists.'
+else
+    echo "add user"
+    useradd --no-create-home --user-group --shell /bin/bash msyslog-client
+fi
+
+# sichere alte Konfiguration zurueck
+if test -f "/etc/msyslog-client.conf.update"; then
+    echo "restore configuration"
+    mv /etc/msyslog-client.conf.update /etc/msyslog-client.conf
+fi
 
 # Setze Rechte
+echo "set permissions"
 chmod 750 /usr/local/sbin/msyslog-client.sh
 chmod 644 /etc/msyslog-client.conf
 
 # Setze Besitzer und Gruppe
+echo "set owner"
 chown msyslog-client:msyslog-client /usr/local/sbin/msyslog-client.sh
 chown msyslog-client:msyslog-client /etc/msyslog-client.conf
 
 # aktiviere systemd-unit
+echo "activate service"
 systemctl enable msyslog-client.service
-systemctl start msyslog-client.service
+systemctl restart msyslog-client.service

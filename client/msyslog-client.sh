@@ -45,7 +45,6 @@ Options:
 
 EOF
 }
-
 function check_logfile_paths {
     # check if all logfiles from the config exist
     for i in "${logfile_paths[@]}"
@@ -59,6 +58,7 @@ function check_logfile_paths {
 function output_status {
     # checkif process is running
     if test -f "$pid_file"; then
+        echo "server & port:" "$log_receiver_fqdn":"$log_receiver_port"
         echo "config-file:" $config_file
         echo "pid-file:" $pid_file
         echo "running processes:"
@@ -67,7 +67,6 @@ function output_status {
         echo "script is not running"
     fi
 }
-
 function stop_logging {
     # checkif process is running
     if test -f "$pid_file"; then
@@ -91,7 +90,7 @@ function start_logging {
             # start processes in background
             # starte jeden prozess in einer subshell und schreibe die pid in eine datei
             # shellcheck disable=2016
-        	  (tail --lines=0 --follow "$i" & echo $! >> "$pid_file") | (stdbuf -oL -eL awk -v prefix="$fqdn $i" '{print prefix $0}' & echo $! >> "$pid_file") | nc "$log_receiver_fqdn" "$log_receiver_port" & echo $! >> "$pid_file" &
+        	  (tail --lines=0 --follow "$i" & echo $! >> "$pid_file") | (stdbuf -oL -eL awk -v prefix="$fqdn $i " '{print prefix $0}' & echo $! >> "$pid_file") | ncat --send-only "$log_receiver_fqdn" "$log_receiver_port" & echo $! >> "$pid_file" &
             #https://unix.stackexchange.com/questions/25372/turn-off-buffering-in-pipe
         done
     fi
