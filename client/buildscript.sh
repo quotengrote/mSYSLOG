@@ -16,6 +16,7 @@ mkdir -p "$BUILD_DIR"/etc/systemd/system
 cp "$GITHUB_WORKSPACE"/client/dpkg-deb-controlfile "$BUILD_DIR"/DEBIAN/control
 cp "$GITHUB_WORKSPACE"/client/msyslog-client.sh "$BUILD_DIR"/usr/local/sbin/msyslog-client.sh
 cp "$GITHUB_WORKSPACE"/client/msyslog-client.conf "$BUILD_DIR"/etc/msyslog-client.conf
+cp "$GITHUB_WORKSPACE"/client/dpkg-deb-preinst "$BUILD_DIR"/DEBIAN/preinst
 cp "$GITHUB_WORKSPACE"/client/dpkg-deb-postinst "$BUILD_DIR"/DEBIAN/postinst
 cp "$GITHUB_WORKSPACE"/client/systemd-unit "$BUILD_DIR"/etc/systemd/system/msyslog-client.service
 
