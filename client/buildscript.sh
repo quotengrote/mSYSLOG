@@ -48,10 +48,8 @@ echo "### Debug"
 echo pwd
 pwd
 echo ls
-ls /home/runner
+ls -R /home/runner
 echo info
 dpkg-deb --info "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
-echo show
-dpkg-deb --show "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
-echon content
+echo content
 dpkg-deb --contents "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
