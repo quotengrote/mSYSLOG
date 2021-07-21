@@ -12,7 +12,7 @@ mkdir -p "$BUILD_DIR"/etc/
 mkdir -p "$BUILD_DIR"/usr/local/sbin
 mkdir -p "$BUILD_DIR"/etc/systemd/system
 
-echo "### kopiere Dateien an vorgesehe Verzeichnisse im Zielsystem"
+echo "### kopiere Dateien an vorgesehene Verzeichnisse im Zielsystem"
 cp "$GITHUB_WORKSPACE"/client/dpkg-deb-controlfile "$BUILD_DIR"/DEBIAN/control
 cp "$GITHUB_WORKSPACE"/client/msyslog-client.sh "$BUILD_DIR"/usr/local/sbin/msyslog-client.sh
 cp "$GITHUB_WORKSPACE"/client/msyslog-client.conf "$BUILD_DIR"/etc/msyslog-client.conf
