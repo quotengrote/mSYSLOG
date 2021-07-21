@@ -22,6 +22,7 @@ cp "$GITHUB_WORKSPACE"/client/systemd-unit "$BUILD_DIR"/etc/systemd/system/msysl
 
 # Setze Rechte für postinst-Script
 chmod 0755 "$BUILD_DIR"/DEBIAN/postinst
+chmod 0755 "$BUILD_DIR"/DEBIAN/preinst
 
 # Wechsel in "build"-Verzeichnis
 # shellcheck disable=2164
