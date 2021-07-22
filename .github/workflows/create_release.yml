@@ -36,4 +36,4 @@ jobs:
           upload_url: ${{ github.sha }}
           asset_path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           asset_name: msyslog-client_${{ github.sha }}.deb
-          #asset_content_type: application/gzip
+          asset_content_type: application/gzip
