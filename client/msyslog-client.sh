@@ -30,7 +30,7 @@ function get_config_from_file {
         echo "teste var"
         if test -z "$checkvar"; then
             echo "error: no logfiles set"
-            exit 4
+            exit 6
         fi
         # shellcheck disable=2046
         IFS=',' read -r -a logfile_paths <<< $(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
