@@ -36,8 +36,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: msyslog-client_${{ github.sha }}.deb
+          path: ${{ github.workspace }}
       - name: make script executable
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
@@ -48,8 +50,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: msyslog-client_${{ github.sha }}.deb
+          path: ${{ github.workspace }}
       - name: make script executable
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
@@ -60,8 +64,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: msyslog-client_${{ github.sha }}.deb
+          path: ${{ github.workspace }}
       - name: make script executable
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
