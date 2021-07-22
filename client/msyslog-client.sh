@@ -36,13 +36,6 @@ function get_config_from_file {
             echo "error: log_receiver_fqdn not set"
             exit 3
         fi
-        for i in "${logfile_paths[@]}"
-        do
-            if test -z "${logfile_paths[@]}"; then
-                echo "error: no logfiles set"
-                exit 4
-            fi
-        done
     else
         echo "error: config not found"
         exit 1

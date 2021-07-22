@@ -44,20 +44,6 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_config.sh
-  test_install_without_specified_logfiles:
-    runs-on: ubuntu-20.04
-    needs: build_deb
-    steps:
-      - name: checkout
-        uses: actions/checkout@v1
-      - uses: actions/download-artifact@v2
-        with:
-          name: msyslog-client_${{ github.sha }}.deb
-          path: ${{ github.workspace }}
-      - name: make script executable
-        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
-      - name: run script
-        run: ${{ github.workspace }}/client/tests/without_logfiles.sh
   test_install_without_set_logfiles:
     runs-on: ubuntu-20.04
     needs: build_deb
