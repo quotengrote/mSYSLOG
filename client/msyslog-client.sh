@@ -128,7 +128,6 @@ case "$1" in
         output_help
         ;;
     --status | -s | status)
-        get_config_from_file
         output_status
         ;;
     *)
