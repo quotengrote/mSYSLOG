@@ -36,6 +36,14 @@ function get_config_from_file {
             echo "error: log_receiver_fqdn not set"
             exit 3
         fi
+        # check if all logfiles from the config exist
+        for i in "${logfile_paths[@]}"
+        do
+            if test ! -f "$i"; then # wenn datei NCIHT existiert
+                echo "error: specified logfiles don't exist"
+                exit 5
+            fi
+        done
     else
         echo "error: config not found"
         exit 1
@@ -55,16 +63,7 @@ Options:
 
 EOF
 }
-function check_logfile_paths {
-    # check if all logfiles from the config exist
-    for i in "${logfile_paths[@]}"
-    do
-        if test ! -f "$i"; then # wenn datei NCIHT existiert
-            echo "error: specified logfiles don't exist"
-            exit 5
-        fi
-    done
-}
+
 function output_status {
     # checkif process is running
     if test -f "$pid_file"; then
@@ -92,7 +91,6 @@ function start_logging {
     if test -f "$pid_file"; then
         echo "script is already running"
     else
-        check_logfile_paths # funktion
         set_fqdn
         # for every path in ... do
         for i in "${logfile_paths[@]}"
