@@ -65,16 +65,14 @@ EOF
 }
 function output_status {
     get_config_from_file
-    # checkif process is running
-    if test -f "$pid_file"; then
         echo "server & port:" "$log_receiver_fqdn":"$log_receiver_port"
         echo "config-file:" $config_file
-        echo "pid-file:" $pid_file
-        echo "running processes:"
-        cat  "$pid_file"
-    else
-        echo "script is not running"
-    fi
+        # checkif process is running
+        if test -f "$pid_file"; then
+            echo "pid-file:" $pid_file
+            echo "running processes:"
+            cat  "$pid_file"
+        fi
 }
 function stop_logging {
     # checkif process is running
