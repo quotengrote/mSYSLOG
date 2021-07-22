@@ -44,7 +44,7 @@ function get_config_from_file {
                 exit 5
             fi
             echo "$i"
-            if test ! -z "$i"; then
+            if test -z "$i"; then
                 echo "error: no logfiles set"
                 exit 4
             fi
