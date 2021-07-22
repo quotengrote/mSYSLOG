@@ -39,8 +39,8 @@ function get_config_from_file {
         # check if all logfiles from the config exist
         for i in "${logfile_paths[@]}"
         do
-            if test ! -f "$i"; then # wenn datei NCIHT existiert
-                echo "error: specified logfiles don't exist"
+            if test ! -f "$i"; then # wenn datei NICHT existiert
+                echo "error: specified logfile(s) don't exist"
                 exit 5
             fi
         done
@@ -63,8 +63,8 @@ Options:
 
 EOF
 }
-
 function output_status {
+    get_config_from_file
     # checkif process is running
     if test -f "$pid_file"; then
         echo "server & port:" "$log_receiver_fqdn":"$log_receiver_port"

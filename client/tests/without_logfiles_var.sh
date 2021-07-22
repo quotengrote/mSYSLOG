@@ -13,6 +13,7 @@ sudo systemctl enable msyslog-client.service
 
 echo "start service"
 sudo systemctl start msyslog-client.service
+
 echo "unset logfiles"
 sudo rm /etc/msyslog-client.conf
 sudo cat <<'EOF' | sudo tee -a /etc/msyslog-client.conf
@@ -24,7 +25,6 @@ logfiles=
 # fqdn and port to which the data should get send
 log_receiver_fqdn=127.0.0.1
 log_receiver_port=12345
-
 
 EOF
 
