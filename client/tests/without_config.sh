@@ -8,6 +8,12 @@ sudo ncat -l -k -p 12345 &
 echo "Install package"
 sudo apt install --fix-broken "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
 
+echo "enable service"
+sudo systemctl enable msyslog-client.service
+
+echo "start service"
+sudo systemctl start msyslog-client.service
+
 echo "remove config"
 sudo rm /etc/msyslog-client.conf
 
