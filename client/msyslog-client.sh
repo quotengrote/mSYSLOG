@@ -57,6 +57,7 @@ function get_config_from_file {
         done
     else
         echo "error: config not found"
+        echo "gebe exit1 aus"
         exit 1
     fi
 }
