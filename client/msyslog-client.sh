@@ -43,8 +43,8 @@ function get_config_from_file {
                 echo "error: specified logfile(s) don't exist"
                 exit 5
             fi
+            echo "$i"
             if test ! -z "$i"; then
-                echo "$i"
                 echo "error: no logfiles set"
                 exit 4
             fi
