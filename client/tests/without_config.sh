@@ -6,7 +6,8 @@ echo "starte ncat und packe es in den hintergrund"
 sudo ncat -l -k -p 12345 &
 
 echo "Install package"
-sudo apt install --fix-broken $GITHUB_WORKSPACE/msyslog-client_$GITHUB_SHA.deb -y
+sudo dpkg -i $GITHUB_WORKSPACE/msyslog-client_$GITHUB_SHA.deb
+sudo apt install --fix-broken -y
 
 echo "remove config"
 sudo rm /etc/msyslog-client.conf
