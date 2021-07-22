@@ -29,19 +29,22 @@ function get_config_from_file {
 
         # prüfe ob variablen nicht leer sind
         if test -z "$log_receiver_port"; then
-            echo "log_receiver_port not set"
+            echo "error: log_receiver_port not set"
             exit 2
         fi
         if test -z "$log_receiver_fqdn"; then
-            echo "log_receiver_fqdn not set"
+            echo "error: log_receiver_fqdn not set"
             exit 3
         fi
-        if test -z "${logfile_paths[@]}"; then
-            echo "no logfiles set"
-            exit 4
-        fi
+        for i in "${logfile_paths[@]}"
+        do
+            if test -z "${logfile_paths[@]}"; then
+                echo "error: no logfiles set"
+                exit 4
+            fi
+        done
     else
-        echo "config not found"
+        echo "error: config not found"
         exit 1
     fi
 }
@@ -64,7 +67,7 @@ function check_logfile_paths {
     for i in "${logfile_paths[@]}"
     do
         if test ! -f "$i"; then # wenn datei NCIHT existiert
-            echo "specified logfiles don't exist"
+            echo "error: specified logfiles don't exist"
             exit 5
         fi
     done
