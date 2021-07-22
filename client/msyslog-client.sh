@@ -17,12 +17,21 @@ function set_prefix {
 function get_config_from_file {
     # lese/binde ein config ein
     if test -f "$config_file"; then
+        echo "gehe in lese config"
         # https://dzone.com/articles/bash-snippet-reading-values-from-a-configuration-f
         log_receiver_port=$(awk -F"=" '/log_receiver_port=/ { print $2 }' $config_file)
         log_receiver_fqdn=$(awk -F"=" '/log_receiver_fqdn=/ { print $2 }' $config_file)
         # erstelle array "logfile_paths"
         # shellcheck disable=2046
-        IFS=',' read -r -a logfile_paths <<< $( awk -F"=" '/logfiles=/ { print $2 }' $config_file)
+        echo "setze var"
+        checkvar=$(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
+        echo "$checkvar"
+        echo "teste var"
+        if test -z "$checkvar"; then
+            echo "error: no logfiles set"
+            exit 4
+        fi
+        IFS=',' read -r -a logfile_paths <<< $(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
         # erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
         # leerzeichen erlaubt, werte kmma getrennt
         # awk: nimm alles hinter name= als eine variable
@@ -42,12 +51,6 @@ function get_config_from_file {
             if test ! -f "$i"; then # wenn datei NICHT existiert
                 echo "error: specified logfile(s) don't exist"
                 exit 5
-            fi
-            echo "logfile pfade!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-            echo "$i"
-            if test -z "$i"; then
-                echo "error: no logfiles set"
-                exit 4
             fi
         done
     else
