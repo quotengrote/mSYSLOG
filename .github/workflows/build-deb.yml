@@ -1,5 +1,5 @@
 name: build packages
-on: [pull_request]
+on: [push]
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -8,6 +8,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Run Shellcheck
         uses: azohra/shell-linter@latest
+
   build_deb:
     needs: lint
     runs-on: ubuntu-20.04
@@ -24,6 +25,7 @@ jobs:
           name: msyslog-client_${{ github.sha }}.deb
           path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           if-no-files-found: error
+
   test_install:
     runs-on: ubuntu-20.04
     needs: build_deb
@@ -52,6 +54,7 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_config.sh
+
   test_install_without_set_logfiles:
     runs-on: ubuntu-20.04
     needs: build_deb
@@ -66,6 +69,7 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_logfiles_var.sh
+        
   test_install_without_set_log_receiver_fqdn:
     runs-on: ubuntu-20.04
     needs: build_deb
