@@ -20,12 +20,13 @@
   - [Table of contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Getting started](#getting-started)
-    - [Dependencies](#dependencies)
-    - [Setup deb](#setup-deb)
-    - [setup manual](#setup-manual)
+    - [install msyslog-client](#install-msyslog-client)
+    - [remove msyslog-client](#remove-msyslog-client)
   - [Usage client](#usage-client)
-  - [Example client Configuration](#example-client-configuration)
+    - [Example client Configuration](#example-client-configuration)
+    - [Troubleshooting](#troubleshooting)
   - [Usage server](#usage-server)
+  - [Build](#build)
   - [License](#license)
 <!-- TOC END -->
 
@@ -91,7 +92,7 @@ Problem: $log_receiver_fqdn ist not set
 Solution: set variable in config file
 
 #### Error5
-Problem: no logiles are set
+Problem: no logfiles are set
 
 Solution: set logfiles in config file
 

@@ -22,9 +22,15 @@ log_receiver_port=12345
 
 
 EOF
+
 echo "restart service"
 sudo systemctl restart msyslog-client.service
 echo "msyslog status"
 sudo systemctl status msyslog-client.service
 echo "msyslog status"
 sudo /usr/local/sbin/msyslog-client.sh --status
+
+if [ $? -eq 5 ]
+    echo "Test erfolgreich"
+    exit 0
+fi
