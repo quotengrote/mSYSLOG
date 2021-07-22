@@ -17,21 +17,17 @@ function set_prefix {
 function get_config_from_file {
     # lese/binde ein config ein
     if test -f "$config_file"; then
-        echo "gehe in lese config"
         # https://dzone.com/articles/bash-snippet-reading-values-from-a-configuration-f
         log_receiver_port=$(awk -F"=" '/log_receiver_port=/ { print $2 }' $config_file)
         log_receiver_fqdn=$(awk -F"=" '/log_receiver_fqdn=/ { print $2 }' $config_file)
-        # erstelle array "logfile_paths"
-        # shellcheck disable=2046
-        echo "setze var"
+        # prufe ob im array jeweils ein value zum key gesetzt ist
         # shellcheck disable=2046
         checkvar=$(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
-        echo "$checkvar"
-        echo "teste var"
         if test -z "$checkvar"; then
-            echo "error: no logfiles set"
+            echo "error[6]: no logfiles set"
             exit 6
         fi
+        # erstelle array "logfile_paths"
         # shellcheck disable=2046
         IFS=',' read -r -a logfile_paths <<< $(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
         # erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
@@ -40,23 +36,23 @@ function get_config_from_file {
 
         # prüfe ob variablen nicht leer sind
         if test -z "$log_receiver_port"; then
-            echo "error: log_receiver_port not set"
+            echo "error[2]: log_receiver_port not set"
             exit 2
         fi
         if test -z "$log_receiver_fqdn"; then
-            echo "error: log_receiver_fqdn not set"
+            echo "error[3]: log_receiver_fqdn not set"
             exit 3
         fi
         # check if all logfiles from the config exist
         for i in "${logfile_paths[@]}"
         do
             if test ! -f "$i"; then # wenn datei NICHT existiert
-                echo "error: specified logfile(s) don't exist"
+                echo "error[5]: specified logfile(s) don't exist"
                 exit 5
             fi
         done
     else
-        echo "error: config not found"
+        echo "error[1]: config not found"
         echo "gebe exit1 aus"
         exit 1
     fi
