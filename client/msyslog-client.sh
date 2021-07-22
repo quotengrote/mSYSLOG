@@ -24,6 +24,7 @@ function get_config_from_file {
         # erstelle array "logfile_paths"
         # shellcheck disable=2046
         echo "setze var"
+        # shellcheck disable=2046
         checkvar=$(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
         echo "$checkvar"
         echo "teste var"
@@ -31,6 +32,7 @@ function get_config_from_file {
             echo "error: no logfiles set"
             exit 4
         fi
+        # shellcheck disable=2046
         IFS=',' read -r -a logfile_paths <<< $(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
         # erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
         # leerzeichen erlaubt, werte kmma getrennt
