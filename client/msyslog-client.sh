@@ -43,6 +43,7 @@ function get_config_from_file {
                 echo "error: specified logfile(s) don't exist"
                 exit 5
             fi
+            echo "logfile pfade!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
             echo "$i"
             if test -z "$i"; then
                 echo "error: no logfiles set"
@@ -121,6 +122,7 @@ case "$1" in
         output_help
         ;;
     --status | -s | status)
+        get_config_from_file
         output_status
         ;;
     *)
