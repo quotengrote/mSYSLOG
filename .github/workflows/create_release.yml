@@ -4,7 +4,6 @@ on:
 #      - master
 jobs:
   build_deb:
-    needs: lint
     runs-on: ubuntu-20.04
     steps:
       - name: checkout
@@ -14,23 +13,27 @@ jobs:
       - name: run script
         run: ${{ github.workspace }}/client/build.sh
 
-  - name: release
-    uses: actions/create-release@v1
-    id: create_release
-    with:
-      draft: true
-      prerelease: false
-      release_name: ${{ github.sha }}
-      tag_name: ${{ github.ref }}
-    env:
-      GITHUB_TOKEN: ${{ github.token }}
+  create_release:
+    needs: build_deb
+    runs-on: ubuntu-20.04
+    steps:
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: true
+          prerelease: false
+          release_name: ${{ github.sha }}
+          tag_name: ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
- - name: upload darwin artifact
-    uses: actions/upload-release-asset@v1
-    env:
-      GITHUB_TOKEN: ${{ github.token }}
-    with:
-      upload_url: ${{ github.sha }}
-      asset_path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
-      asset_name: msyslog-client_${{ github.sha }}.deb
-      #asset_content_type: application/gzip
+      - name: upload darwin artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ github.sha }}
+          asset_path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
+          asset_name: msyslog-client_${{ github.sha }}.deb
+          #asset_content_type: application/gzip
