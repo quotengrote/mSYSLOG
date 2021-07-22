@@ -43,6 +43,10 @@ function get_config_from_file {
                 echo "error: specified logfile(s) don't exist"
                 exit 5
             fi
+            if test -z "$i"; then
+                echo "error: no logfiles set"
+                exit 4
+            fi
         done
     else
         echo "error: config not found"
