@@ -69,7 +69,7 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_logfiles_var.sh
-        
+
   test_install_without_set_log_receiver_fqdn:
     runs-on: ubuntu-20.04
     needs: build_deb
