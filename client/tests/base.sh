@@ -5,13 +5,8 @@ sudo apt install ncat
 echo "starte ncat und packe es in den hintergrund"
 sudo ncat -l -k -p 12345 &
 
-
-sudo find / | grep msyslog
-
 echo "Install package"
-sudo apt install --fix-broken /home/runner/work/mSYSLOG/mSYSLOG/msyslog-client_"$GITHUB_SHA".deb -y
-
-
+sudo apt install --fix-broken "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
 
 echo "enable service"
 sudo systemctl enable msyslog-client.service
