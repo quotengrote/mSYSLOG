@@ -44,7 +44,7 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_config.sh
-  test2_logfiles:
+  test3_logfiles_fiel_not_found:
     runs-on: ubuntu-20.04
     needs: build_deb
     steps:
