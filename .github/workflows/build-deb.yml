@@ -14,7 +14,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: msyslog-client_${{ github.sha }}.sh
+          name: msyslog-client_${{ github.sha }}.deb
           path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           if-no-files-found: error
   test0_base:
