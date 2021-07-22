@@ -31,16 +31,6 @@ dpkg-deb --build . msyslog-client_"$GITHUB_SHA".deb
 # verschiebe gebautes Paket
 mv msyslog-client_"$GITHUB_SHA".deb "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
 
-# Tests
-sudo apt install --fix-broken "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb -y
-sudo systemctl enable msyslog-client.service
-sudo systemctl start msyslog-client.service
-sudo systemctl status msyslog-client.service
-sudo msyslog-client.sh --help
-sudo systemctl restart msyslog-client.service
-sudo systemctl status msyslog-client.service
-sudo msyslog-client.sh --status
-
 # Debug
 dpkg-deb --info "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb
 dpkg-deb --contents "$GITHUB_WORKSPACE"/msyslog-client_"$GITHUB_SHA".deb

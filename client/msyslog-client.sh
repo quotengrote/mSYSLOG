@@ -20,14 +20,40 @@ function get_config_from_file {
         # https://dzone.com/articles/bash-snippet-reading-values-from-a-configuration-f
         log_receiver_port=$(awk -F"=" '/log_receiver_port=/ { print $2 }' $config_file)
         log_receiver_fqdn=$(awk -F"=" '/log_receiver_fqdn=/ { print $2 }' $config_file)
+        # prufe ob im array jeweils ein value zum key gesetzt ist
+        # shellcheck disable=2046
+        checkvar=$(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
+        if test -z "$checkvar"; then
+            echo "error[6]: no logfiles set"
+            exit 6
+        fi
         # erstelle array "logfile_paths"
         # shellcheck disable=2046
-        IFS=',' read -r -a logfile_paths <<< $( awk -F"=" '/logfiles=/ { print $2 }' $config_file)
+        IFS=',' read -r -a logfile_paths <<< $(awk -F"=" '/logfiles=/ { print $2 }' $config_file)
         # erstelle array für logfile pfade, vorher müssen vars natürlich gesetzt sein
         # leerzeichen erlaubt, werte kmma getrennt
         # awk: nimm alles hinter name= als eine variable
+
+        # prüfe ob variablen nicht leer sind
+        if test -z "$log_receiver_port"; then
+            echo "error[2]: log_receiver_port not set"
+            exit 2
+        fi
+        if test -z "$log_receiver_fqdn"; then
+            echo "error[3]: log_receiver_fqdn not set"
+            exit 3
+        fi
+        # check if all logfiles from the config exist
+        for i in "${logfile_paths[@]}"
+        do
+            if test ! -f "$i"; then # wenn datei NICHT existiert
+                echo "error[5]: specified logfile(s) don't exist"
+                exit 5
+            fi
+        done
     else
-        echo "Error1: No config at" "$config_file"
+        echo "error[1]: config not found"
+        echo "gebe exit1 aus"
         exit 1
     fi
 }
@@ -45,26 +71,15 @@ Options:
 
 EOF
 }
-function check_logfile_paths {
-    # check if all logfiles from the config exist
-    for i in "${logfile_paths[@]}"
-    do
-        if test ! -f "$i"; then # wenn datei NCIHT existiert
-            echo "Error2:" "$i" "does not exist! Check" $config_file
-            exit 2
-        fi
-    done
-}
 function output_status {
+    get_config_from_file
+    echo "server & port:" "$log_receiver_fqdn":"$log_receiver_port"
+    echo "config-file:" $config_file
     # checkif process is running
     if test -f "$pid_file"; then
-        echo "server & port:" "$log_receiver_fqdn":"$log_receiver_port"
-        echo "config-file:" $config_file
         echo "pid-file:" $pid_file
         echo "running processes:"
         cat  "$pid_file"
-    else
-        echo "script is not running"
     fi
 }
 function stop_logging {
@@ -82,7 +97,6 @@ function start_logging {
     if test -f "$pid_file"; then
         echo "script is already running"
     else
-        check_logfile_paths # funktion
         set_fqdn
         # for every path in ... do
         for i in "${logfile_paths[@]}"

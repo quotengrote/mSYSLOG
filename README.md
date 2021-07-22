@@ -4,32 +4,29 @@
 | '_ ` _ \\___ \\ V /\___ \| |  | | | | |  _
 | | | | | |___) || |  ___) | |__| |_| | |_| |
 |_| |_| |_|____/ |_| |____/|_____\___/ \____|
-```
+
 
  A simple centralized logging solution almost only with bash and gnu-tools.
+```
 
-[![bash-lint](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml/badge.svg?branch=master)](https://github.com/quotengrote/mSYSLOG/actions/workflows/bash_lint.yml)
 [![shieldio-issues](https://img.shields.io/github/issues/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/issues)
 [![shieldio-pr](https://img.shields.io/github/issues-pr/quotengrote/msyslog)](https://github.com/quotengrote/mSYSLOG/pulls)
 [![shieldio-license](https://img.shields.io/github/license/quotengrote/msyslog)](./LICENSE)
 ![shieldio-lastcommit](https://img.shields.io/github/last-commit/quotengrote/msyslog)
 [![build packages](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml/badge.svg?branch=master)](https://github.com/quotengrote/mSYSLOG/actions/workflows/build-deb.yml)
 
-## Table of contents
-<!-- TOC START min:1 max:3 link:true asterisk:false update:true -->
-  - [Table of contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Getting started](#getting-started)
-    - [Dependencies](#dependencies)
-    - [Setup deb](#setup-deb)
-    - [setup manual](#setup-manual)
-  - [Usage client](#usage-client)
-  - [Example client Configuration](#example-client-configuration)
-  - [Usage server](#usage-server)
-  - [License](#license)
-<!-- TOC END -->
-
-
+<!-- TOC titleSize:2 tabSpaces:4 depthFrom:1 depthTo:3 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+## Table of Contents
+* [Introduction](#introduction)
+* [Getting started](#getting-started)
+    * [install msyslog-client](#install-msyslog-client)
+    * [remove msyslog-client](#remove-msyslog-client)
+* [Usage client](#usage-client)
+    * [Example client Configuration](#example-client-configuration)
+* [Usage server](#usage-server)
+* [Build](#build)
+* [License](#license)
+<!-- /TOC -->
 
 ## Introduction
 mSYSLOG is a programm that collects logfiles and send it via `netcat` to a server.
@@ -57,6 +54,7 @@ Options:
 
 
 ### Example client Configuration
+
 ```
 # configfile for msyslog-client
 
@@ -68,18 +66,6 @@ log_receiver_fqdn=acng.server
 log_receiver_port=12345
 
 ```
-
-### Troubleshooting
-#### Error1
-Problem: config file not found at `/etc/msyslog-client.conf`
-
-Solution: create [configfile](#example-client-configuration)
-
-#### Error2
-Problem: specified logfile not found
-
-Solution: confirm all specified logfiles are existent
-
 
 ## Usage server
 ``ncat -l -k -p 12345``

@@ -1,19 +1,82 @@
 name: build packages
-on:
-  push:
+on: [pull_request]
 jobs:
-  build_deb_file:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run Shellcheck
+        uses: azohra/shell-linter@latest
+  build_deb:
+    needs: lint
     runs-on: ubuntu-20.04
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: make script exectable
-        run: chmod +x ${{ github.workspace }}/client/buildscript.sh
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/build.sh
       - name: run script
-        run: ${{ github.workspace }}/client/buildscript.sh
+        run: ${{ github.workspace }}/client/build.sh
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: msyslog-client_${{ github.sha }}.sh
+          name: msyslog-client_${{ github.sha }}.deb
           path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           if-no-files-found: error
+  test_install:
+    runs-on: ubuntu-20.04
+    needs: build_deb
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - uses: actions/download-artifact@v2
+        with:
+          name: msyslog-client_${{ github.sha }}.deb
+          path: ${{ github.workspace }}
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/base.sh
+  test_install_without_config_file:
+    runs-on: ubuntu-20.04
+    needs: build_deb
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - uses: actions/download-artifact@v2
+        with:
+          name: msyslog-client_${{ github.sha }}.deb
+          path: ${{ github.workspace }}
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/without_config.sh
+  test_install_without_set_logfiles:
+    runs-on: ubuntu-20.04
+    needs: build_deb
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - uses: actions/download-artifact@v2
+        with:
+          name: msyslog-client_${{ github.sha }}.deb
+          path: ${{ github.workspace }}
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/without_logfiles_var.sh
+  test_install_without_set_log_receiver_fqdn:
+    runs-on: ubuntu-20.04
+    needs: build_deb
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - uses: actions/download-artifact@v2
+        with:
+          name: msyslog-client_${{ github.sha }}.deb
+          path: ${{ github.workspace }}
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/without_log_receiver_fqdn.sh
