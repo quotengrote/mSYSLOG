@@ -17,7 +17,7 @@ jobs:
           name: msyslog-client_${{ github.sha }}.sh
           path: ${{ github.workspace }}/msyslog-client_${{ github.sha }}.deb
           if-no-files-found: error
-  test0_client:
+  test0_base:
     runs-on: ubuntu-20.04
     needs: build_deb
     steps:
@@ -29,7 +29,7 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/base.sh
-  test1_client:
+  test1_config:
     runs-on: ubuntu-20.04
     needs: build_deb
     steps:
@@ -41,7 +41,7 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_config.sh
-  test2_client:
+  test2_logfiles:
     runs-on: ubuntu-20.04
     needs: build_deb
     steps:
@@ -53,7 +53,7 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_logfiles.sh
-  test3_client:
+  test3_log_receiver:
     runs-on: ubuntu-20.04
     needs: build_deb
     steps:
