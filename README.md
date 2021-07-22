@@ -70,32 +70,6 @@ log_receiver_port=12345
 
 ```
 
-### Troubleshooting
-#### Error1
-Problem: config file not found at `/etc/msyslog-client.conf`
-
-Solution: create [configfile](#example-client-configuration)
-
-#### Error2
-Problem: specified logfile not found
-
-Solution: confirm all specified logfiles are existent
-
-#### Error3
-Problem: $log_receiver_port ist not set
-
-Solution: set variable in config file
-
-#### Error4
-Problem: $log_receiver_fqdn ist not set
-
-Solution: set variable in config file
-
-#### Error5
-Problem: no logfiles are set
-
-Solution: set logfiles in config file
-
 ## Usage server
 ``ncat -l -k -p 12345``
 
