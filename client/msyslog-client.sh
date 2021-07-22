@@ -43,7 +43,7 @@ function get_config_from_file {
                 echo "error: specified logfile(s) don't exist"
                 exit 5
             fi
-            if test -z "$i"; then
+            if test ! -z "$i"; then
                 echo "$i"
                 echo "error: no logfiles set"
                 exit 4
@@ -70,14 +70,14 @@ EOF
 }
 function output_status {
     get_config_from_file
-        echo "server & port:" "$log_receiver_fqdn":"$log_receiver_port"
-        echo "config-file:" $config_file
-        # checkif process is running
-        if test -f "$pid_file"; then
-            echo "pid-file:" $pid_file
-            echo "running processes:"
-            cat  "$pid_file"
-        fi
+    echo "server & port:" "$log_receiver_fqdn":"$log_receiver_port"
+    echo "config-file:" $config_file
+    # checkif process is running
+    if test -f "$pid_file"; then
+        echo "pid-file:" $pid_file
+        echo "running processes:"
+        cat  "$pid_file"
+    fi
 }
 function stop_logging {
     # checkif process is running
