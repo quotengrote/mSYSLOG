@@ -33,4 +33,6 @@ sudo /usr/local/sbin/msyslog-client.sh --status
 if [ $? -eq 5 ] ; then
     echo "Test erfolgreich"
     exit 0
+else
+    exit 1
 fi
