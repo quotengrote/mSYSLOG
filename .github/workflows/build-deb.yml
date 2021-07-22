@@ -1,7 +1,6 @@
 name: build packages
 on: [pull_request]
 jobs:
-jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -10,6 +9,7 @@ jobs:
       - name: Run Shellcheck
         uses: azohra/shell-linter@latest
   build_deb:
+    needs: lint
     runs-on: ubuntu-20.04
     steps:
       - name: checkout
