@@ -28,7 +28,7 @@ sudo systemctl restart msyslog-client.service
 echo "msyslog status"
 sudo /usr/local/sbin/msyslog-client.sh --status
 
-if [ $? -eq 4 ]
+if [ $? -eq 4 ] ; then
     echo "Test erfolgreich"
     exit 0
 fi
