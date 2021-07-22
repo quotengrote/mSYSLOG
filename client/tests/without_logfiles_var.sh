@@ -13,17 +13,29 @@ sudo systemctl enable msyslog-client.service
 
 echo "start service"
 sudo systemctl start msyslog-client.service
-
-echo "remove config"
+echo "unset logfiles"
 sudo rm /etc/msyslog-client.conf
+sudo cat <<'EOF' | sudo tee -a /etc/msyslog-client.conf
+# configfile for msyslog-client
+
+# files whose contents should be sent(comma-separated)
+logfiles=
+
+# fqdn and port to which the data should get send
+log_receiver_fqdn=127.0.0.1
+log_receiver_port=12345
+
+
+EOF
 
 echo "restart service"
 sudo systemctl restart msyslog-client.service
-
+echo "msyslog status"
+sudo systemctl status msyslog-client.service
 echo "msyslog status"
 sudo /usr/local/sbin/msyslog-client.sh --status
 
-if [ $? -eq 1 ] ; then
+if [ $? -eq 5 ] ; then
     echo "Test erfolgreich"
     exit 0
 else

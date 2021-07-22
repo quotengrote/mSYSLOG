@@ -58,6 +58,20 @@ jobs:
         run: chmod +x ${{ github.workspace }}/client/tests/*.sh
       - name: run script
         run: ${{ github.workspace }}/client/tests/without_logfiles.sh
+  test2_logfiles:
+    runs-on: ubuntu-20.04
+    needs: build_deb
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - uses: actions/download-artifact@v2
+        with:
+          name: msyslog-client_${{ github.sha }}.deb
+          path: ${{ github.workspace }}
+      - name: make script executable
+        run: chmod +x ${{ github.workspace }}/client/tests/*.sh
+      - name: run script
+        run: ${{ github.workspace }}/client/tests/without_logfiles_var.sh
   test3_log_receiver:
     runs-on: ubuntu-20.04
     needs: build_deb
