@@ -89,7 +89,6 @@ jobs:
   create_release:
     runs-on: ubuntu-20.04
     needs:
-      - build_deb
       - test_install_without_set_log_receiver_fqdn
       - test_install
       - test_install_without_config_file
