@@ -88,7 +88,6 @@ jobs:
 
   create_release:
     runs-on: ubuntu-20.04
-    if: startsWith(github.ref, 'refs/tags/v')
     needs:
       - test_install_without_set_log_receiver_fqdn
       - test_install
