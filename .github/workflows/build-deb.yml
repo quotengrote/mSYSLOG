@@ -106,7 +106,7 @@ jobs:
           draft: true
           prerelease: false
 
-  create_release:
+  upload_release:
     runs-on: ubuntu-20.04
     needs: create_release
     steps:
