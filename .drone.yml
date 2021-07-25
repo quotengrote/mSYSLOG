@@ -7,4 +7,4 @@ steps:
 - name: shellcheck
   image: koalaman/shellcheck:latest
   commands:
-  - shellcheck *.sh
+    - grep -rl '^#!/.*sh' * | xargs -n1 shellcheck
