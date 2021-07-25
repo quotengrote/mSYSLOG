@@ -5,6 +5,6 @@ name: build-client
 
 steps:
 - name: shellcheck
-  image: koalaman/shellcheck
+  image: koalaman/shellcheck:latest
   commands:
   - shellcheck *.sh
