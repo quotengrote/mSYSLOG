@@ -1,0 +1,10 @@
+---
+kind: pipeline
+type: docker
+name: build-client
+
+steps:
+- name: shellcheck
+  image: koalaman/shellcheck
+  commands:
+  - shellcheck *.sh
